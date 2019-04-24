@@ -19,10 +19,10 @@ Additional features may include:
 #User Stories
  1. The user opens the website and is prompted to login or register.
  2. After logging in (or registering) they will be brought to the entries page which will display:
-   - A list of all of the entries with hyperlinks to their show pages
-   - An option to create a new entry
-   - A search bar to query data according to specific search parameters
-   - A button that will send the user to their profile, which will contain
+     - A list of all of the entries with hyperlinks to their show pages
+     - An option to create a new entry
+     - A search bar to query data according to specific search parameters
+     - A button that will send the user to their profile, which will contain
  3. When the user clicks on an entry link, they will be brought to a show page. There they can read all of the data associated with that entry.
  4. If the user is the owner of the entry, they will have the option to edit or delete the entry.
  5. The user will also have the ability to search the database in a search bar and to navigate back to the index page.
