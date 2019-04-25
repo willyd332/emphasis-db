@@ -29,6 +29,7 @@ router.post('/entries', async (req,res)=>{
 
 try {
   const newEntry = await Entry.create({
+      userId: req.session.currUserId,
       author: req.body.author,
       title: req.body.title,
       link: req.body.link,

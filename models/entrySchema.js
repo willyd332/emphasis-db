@@ -3,14 +3,21 @@ const mongoose = require('mongoose');
 const entrySchema = new mongoose.Schema
 (
 	{
+		userId: String,
 		author: String,
 		title: String,
 		link: String,
-		origPubYear: Number,
+		string: String,
+		publicationYear: Number,
 		contentType: String,
 		publisher: String,
-		text: {body: String, analysis: null}, //later on, analysis will be set to an object from the API
-		data:
+		text: [{
+		  text: String,
+		  analysis: Schema.Types.Mixed,
+		  data: Schema.Types.Mixed
+		}],
+		data: Schema.Types.Mixed,
+		engagementScore: Number,
 		{
 			engagementScore: Number,
 			yellow:
@@ -23,7 +30,7 @@ const entrySchema = new mongoose.Schema
 				num: Number,
 				percent: Number
 			}
-			fadedGreen:
+			lightGreen:
 			{
 				num: Number,
 				percent: Number
