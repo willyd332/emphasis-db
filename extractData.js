@@ -16,10 +16,10 @@ class SectionData {
   }
 }
 
-const extractData = (analysis)=>{
+const extractData = ()=>{
   const sectionData = new SectionData(0,0,0,0,0);
 
-  analysis.analysis.forEach((sentence)=>{
+  section.analysis.analysis.forEach((sentence)=>{
       if (sentence.sections[0].section_type === "yellow_thing"){
         sectionData.yellow.amount += 1;
       } else if (sentence.sections[0].section_type === "light_blue_thing"){

@@ -1,6 +1,9 @@
+"use strict";
+
 const stringParser = require('stringParser')
 const extractData  = require('extractData')
 const compileData  = require('compileData')
+const engagementScoreCalc  = require('engagementScore')
 const axios        = require('axios');
 const url          = 'https://emphasis.ai/api/analysis_1/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -40,13 +43,16 @@ try {
   const sectionsArray = stringParser(req.body.string);
   await apiCall(sectionsArray);
   sectionsArray.forEach(function(section)=>{
-    section.data = extractData(section.analysis);
+    section.data = extractData();
   })
-  const entryData = compileData(sectionsArray)
+  const entryData = compileData()
+
+  const engagementScore = engagementScoreCalc()
 
   const updatedEntry = await Entry.findByIdAndUpdate({newEntry._id},{
     text: sectionArr,
-    data: entryData
+    data: entryData,
+    engagementScore: engagementScore
   }, {new: true})
 
   res.render('entries/show.ejs', {

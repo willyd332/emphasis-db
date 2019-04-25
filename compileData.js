@@ -1,5 +1,4 @@
-// THIS WILL RETUR THE FINAL DATA OBJECT COMPILES FROM ALL OF THE SECTIONS
-
+// THIS WILL RETURN THE FINAL DATA OBJECT COMPILES FROM ALL OF THE SECTIONS
 "use strict";
 
 class EntryData {
@@ -22,12 +21,12 @@ class EntryData {
   }
 }
 
-const compileData = (array) => {
+const compileData = () => {
 
 const entryData = new EntryData(0,0,0,0,0,0,0,0,0,0)
 let totalSentences = 0;
 
-array.forEach(function(section)=>{
+sectionsArray.forEach(function(section)=>{
   entryData.yellow.amount += section.data.yellow.amount;
   entryData.blue.amount += section.data.blue.amount;
   entryData.green.amount += section.data.green.amount;
