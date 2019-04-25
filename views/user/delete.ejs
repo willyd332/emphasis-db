@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete user <%=user.username%></title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+
+	<h1>Delete user <%=user.username%></h1>
+
+	<hr>
+
+	<h1>YOU ARE ABOUT TO DELETE YOUR USER ACCOUNT</h1><br>
+	<h1>ARE YOU SURE YOU WANT TO DO THIS???</h1><br>
+
+	<hr>
+
+	<p>Please enter your password so we're sure you're serious about deleting your user account:</p><br>
+
+	<form action="/auth/delete?_method=DELETE" method="POST">
+		<input type="password" name="password" placeholder="Password"></input><br>
+		<button type="submit">Submit</button><br>
+	</form>
+
+<a href="/">Back to root route</a>
+
+</body>
+</html>
