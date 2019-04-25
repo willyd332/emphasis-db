@@ -4,6 +4,7 @@ const router = express.Router();
 const userController = require('./userController');
 const authController = require('./authController');
 const homeController = require('./homeController');
+const entryController = require('./entryController');
 
 router.use(express.static('public'));
 
@@ -33,6 +34,12 @@ router.use('/home', function(req, res, next)
 	//Here put things we want to send to the controller
 	next();
 }, homeController);
+
+router.use('/entries', function(req, res, next)
+{
+	//Here put things we want to send to the controller
+	next();
+}, entryController)
 
 
 module.exports = router;

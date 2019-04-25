@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema   = mongoose.Schema
 
-const userSchema = new mongoose.Schema
+const userSchema = new Schema
 (
 	{
 	  username: {
@@ -16,16 +17,13 @@ const userSchema = new mongoose.Schema
 	    type: String,
 	    required: true
 	  },
-		userType: {
-	    type: String,
-	    required: true
-	  },
+		userType: String,
 	  displayname: {
 	    type: String,
 	    required: true
 	  },
 	  entries: [{
-	    type: mongoose.Schema.Types.ObjectId,
+	    type: Schema.Types.ObjectId,
 	    ref: 'Entry'
 	  }]
 	});

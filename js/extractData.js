@@ -16,9 +16,9 @@ class SectionData {
   }
 }
 
-const extractData = ()=>{
+const extractData = (section)=>{
   const sectionData = new SectionData(0,0,0,0,0);
-
+  // console.log(section);
   section.analysis.analysis.forEach((sentence)=>{
       if (sentence.sections[0].section_type === "yellow_thing"){
         sectionData.yellow.amount += 1;
@@ -32,9 +32,8 @@ const extractData = ()=>{
         sectionData.lightGreen.amount += 1;
       }
       })
-      console.log(sectionData);
 
   return sectionData
 }
 
-module.exports = extractData();
+module.exports = extractData;

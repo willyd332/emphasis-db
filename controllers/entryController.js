@@ -1,31 +1,90 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-
 const User = require('../models/userSchema');
 const Entry = require('../models/entrySchema');
+const stringParser = require('../js/stringParser')
+const extractData = require('../js/extractData')
+const compileData = require('../js/compileData')
+const engagementScoreCalc = require('../js/engagementScoreCalc')
+const axios = require('axios');
+const url = 'https://emphasis.ai/api/analysis_1/';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+const apiCall = async (array) => {
+  for (let i = 0; i < array.length; i++) {
+    await axios
+      .post(url, {
+        input: array[i].text
+      })
+      .then((analysis) => {
+        console.log(analysis.data);
+        array[i].analysis = analysis.data;
+      })
+  }
+  // console.log(array);
+  return array
+}
 
 
-router.get('/', function(req, res)
-{
-	//Index route for ALL entries
-	Entry.find({}, function(err, foundEntries)
-	{
-		if (err) {console.log(err);}
-		else
-		{
-			console.log(`GET /entries`);
-			res.render('entry/index.ejs', {entries: foundEntries});
-		}
-	});
+router.get('/new', function(req, res) {
+  res.render('entry/new.ejs')
 });
 
-router.post('/', function(req, res)
-{
-	//POST route for /entries; creates a new entry
-	//Checks the session object to figure out who the author is
+router.get('/', function(req, res) {
+  //Index route for ALL entries
+  Entry.find({}, function(err, foundEntries) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`GET /entries`);
+      res.render('entry/index.ejs', {
+        entries: foundEntries
+      });
+    }
+  });
 });
 
+router.post('/', async function(req, res) {
+
+  try {
+    const newEntry = await Entry.create({
+      userId: req.session.currUserId,
+      author: req.body.author,
+      title: req.body.title,
+      link: req.body.link,
+      string: req.body.string,
+      publicationYear: req.body.publicationYear,
+      contentType: req.body.contentType,
+      publisher: req.body.publisher,
+      text: [],
+      data: {},
+      engagementScore: null
+    });
+
+    let sectionsArray = stringParser(req.body.string);
+    sectionsArray = await apiCall(sectionsArray);
+    sectionsArray.forEach((section) => {
+      section.data = extractData(section);
+    })
+    const entryData = compileData(sectionsArray)
+
+    const engagementScore = engagementScoreCalc(entryData)
+
+    const updatedEntry = await Entry.findByIdAndUpdate(newEntry._id, {
+      text: sectionsArray,
+      data: entryData,
+      engagementScore: engagementScore
+    }, {
+      new: true
+    })
+    const id = updatedEntry._id;
+    res.redirect(`entries/${id}`)
+
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+})
 router.get('/:id', function(req, res)
 {
 	//Show route for a particular entry
