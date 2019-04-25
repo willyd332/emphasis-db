@@ -11,6 +11,51 @@ This information will be added to the user's entry. The categories that will be 
 This description represents the MVP of the Emphasis Database. It will have two models: a user model and an entry model. It will have a login page. It will use Emphasis AI's API to analyze text and fill entries. It will have enough CSS to look pleasing to readers.
 
 Additional features may include:
+
+A search bar that allows users to read the information in the database according to specific search parameters.
+A show page (probably the login page) that includes highlights from the database. A highlight may include a quote from a particular text, as well as pertinent stats. ("Text A got an engagement score of 99% and featured this sentence.")
+API calls from publishing platforms like Kindle and Forbes as well as publications like Medium and the New York Times.
+Extra Bonus: Data visualizations that show entire texts as a cognitive landscape. (Not as hard as it sounds. The trick would be to create a highlight view for text. At first, this would only feature sentence-level emphasis. The true value would appear when multiple modes of analysis were added.)
+#User Stories
+
+The user opens the website and is prompted to login or register.
+After logging in (or registering) they will be brought to the entries page which will display:
+A list of all of the entries with hyperlinks to their show pages
+An option to create a new entry
+A search bar to query data according to specific search parameters
+A button that will send the user to their profile, which will contain
+When the user clicks on an entry link, they will be brought to a show page. There they can read all of the data associated with that entry.
+If the user is the owner of the entry, they will have the option to edit or delete the entry.
+The user will also have the ability to search the database in a search bar and to navigate back to the index page.
+If the user decides to edit their entry, they will be taken to an edit page.
+If they choose to delete the entry, it will be removed and the user will be redirected to the index page.
+If the user decides to create a new entry, they will be taken to a new entry page. They will enter all of the fields provided and submit their entry. The text data they provide will be sent to the Emphasis API. An analysis of the text will be returned. The analysis will appear in the data fields of the entry. Within the analysis,
+When the user creates a new entry, they will have the option to make it public or private. Private entries will be viewable only by the user. Public entries will be viewable by every user.
+If the user decides to go to their account, they will be sent to a user show page. The show page will have all of their user data, as well as a list of their entries.
+#DIVISION OF LABOR:
+
+Main things that must be made:
+
+Translating the returned Analysis into usable Data. (We will make the functions in separate JS files) (Will)
+
+Translating the inputed string into the Array 0f 2000 characters each. (We will make the functions seperate JS files) (Will)
+
+Creating the pages and routes for each wireframe and creating the basic server page (Collin)
+
+This includes setting up the server
+Creating the Views
+Creating the DB
+Creating the Models
+Creating the (basic navigation at first) controllers
+Creating the login/register functions (encrypting passwords, etc…)
+Figuring out and making the actual API call (John)
+
+The statistics function that translates the color percentages into the actual engagement score (based on the optimal 33%:33%:33% ratio. (Bonus)
+
+Somebody should write an About This app page that describes what it's doing and what it might be used for. (John)
+
+Refine the look of the website in CSS (All)
+=======
 - A search bar that allows users to read the information in the database according to specific search parameters.
 - A show page (probably the login page) that includes highlights from the database. A highlight may include a quote from a particular text, as well as pertinent stats. ("Text A got an engagement score of 99% and featured this sentence.")
 - API calls from publishing platforms like Kindle and Forbes as well as publications like Medium and the New York Times.
