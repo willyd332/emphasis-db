@@ -29,16 +29,16 @@ so the score will equal 100 - the total difference times .5
 
 "use strict";
 
-const engagementScoreCalc = () => {
-const deviation = (Math.abs(entryData.yellow.percentage - 33)
-                  + Math.abs(entryData.blue.percentage - 33)
-                  + Math.abs(entryData.green.percentage - 33)
-                  + entryData.lightGreen.percentage
-                  + entryData.fadedBlue.percentage
+const engagementScoreCalc = (data) => {
+const deviation = (Math.abs(data.yellow.percentage - 33)
+                  + Math.abs(data.blue.percentage - 33)
+                  + Math.abs(data.green.percentage - 33)
+                  + data.lightGreen.percentage
+                  + data.fadedBlue.percentage
                   )
 const engagementScore = (100 - deviation / 2)
 
 return engagementScore
 }
 
-module.exports = engagementScoreCalc();
+module.exports = engagementScoreCalc;

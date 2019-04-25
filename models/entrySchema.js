@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema   = mongoose.Schema
 
-const entrySchema = new mongoose.Schema
+const entrySchema = new Schema
 (
 	{
 		userId: String,
@@ -18,34 +19,6 @@ const entrySchema = new mongoose.Schema
 		}],
 		data: Schema.Types.Mixed,
 		engagementScore: Number,
-		{
-			engagementScore: Number,
-			yellow:
-			{
-				num: Number,
-				percent: Number
-			}
-			green:
-			{
-				num: Number,
-				percent: Number
-			}
-			lightGreen:
-			{
-				num: Number,
-				percent: Number
-			}
-			blue:
-			{
-				num: Number,
-				percent: Number
-			}
-			fadedBlue:
-			{
-				num: Number,
-				percent: Number
-			}
-		}
 	}
 );
 

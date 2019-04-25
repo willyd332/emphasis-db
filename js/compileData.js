@@ -21,12 +21,12 @@ class EntryData {
   }
 }
 
-const compileData = () => {
+const compileData = (array) => {
 
 const entryData = new EntryData(0,0,0,0,0,0,0,0,0,0)
 let totalSentences = 0;
 
-sectionsArray.forEach(function(section)=>{
+array.forEach(function(section){
   entryData.yellow.amount += section.data.yellow.amount;
   entryData.blue.amount += section.data.blue.amount;
   entryData.green.amount += section.data.green.amount;
@@ -43,10 +43,9 @@ sectionsArray.forEach(function(section)=>{
   entryData.fadedBlue.percentage = Math.round((entryData.fadedBlue.amount / totalSentences) * 100)
   entryData.lightGreen.percentage = Math.round((entryData.lightGreen.amount / totalSentences) * 100)
 
-console.log(entryData);
 
 return entryData
 }
 
 
-module.exports = compileData();
+module.exports = compileData;
