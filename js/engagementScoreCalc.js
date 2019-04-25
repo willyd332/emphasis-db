@@ -4,7 +4,6 @@
       // The ideal case is 33%-33%-33%-0%-0%
 
 33 33 33 0 0 = 0
-
 and
 50 20 10 10 10
 equals

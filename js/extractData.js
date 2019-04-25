@@ -18,7 +18,6 @@ class SectionData {
 
 const extractData = (section)=>{
   const sectionData = new SectionData(0,0,0,0,0);
-  // console.log(section);
   section.analysis.analysis.forEach((sentence)=>{
       if (sentence.sections[0].section_type === "yellow_thing"){
         sectionData.yellow.amount += 1;

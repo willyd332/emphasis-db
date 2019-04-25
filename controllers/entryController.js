@@ -6,6 +6,7 @@ const Entry = require('../models/entrySchema');
 const stringParser = require('../js/stringParser')
 const extractData = require('../js/extractData')
 const compileData = require('../js/compileData')
+const sentenceArrayMaker = require('../js/sentences')
 const engagementScoreCalc = require('../js/engagementScoreCalc')
 const axios = require('axios');
 const url = 'https://emphasis.ai/api/analysis_1/';
@@ -17,11 +18,9 @@ const apiCall = async (array) => {
         input: array[i].text
       })
       .then((analysis) => {
-        console.log(analysis.data);
         array[i].analysis = analysis.data;
       })
   }
-  // console.log(array);
   return array
 }
 
@@ -58,6 +57,7 @@ router.post('/', async function(req, res) {
       publisher: req.body.publisher,
       text: [],
       data: {},
+      sentences: [],
       engagementScore: null
     });
 
@@ -98,8 +98,11 @@ router.get('/:id', function(req, res)
 		if (err) {console.log(err);}
 		else
 		{
-			console.log(`GET /entries/${req.params.id}`);
-			res.render('entry/show.ejs', {entry: foundEntry});
+      const text = sentenceArrayMaker(foundEntry.text)
+			res.render('entry/show.ejs', {
+        entry: foundEntry,
+        text: text
+      });
 		}
 	});
 
