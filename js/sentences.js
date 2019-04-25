@@ -15,8 +15,6 @@ const sentenceArrayMaker = (array) => {
       sentenceString.sections.forEach((sectionString)=>{
         let sentence = new Sentence('','');
 
-        console.log(sectionString.section_type);
-
         if (sectionString.section_type === 'yellow_thing'){
           sentence.color = 'yellow';
         } else if (sectionString.section_type === 'light_blue_thing'){
