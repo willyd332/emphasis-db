@@ -38,6 +38,7 @@ class Section {
   constructor(str) {
     this.text     = str;
     this.analysis = {};
+    this.data     = {};
   }
 }
 
@@ -60,7 +61,7 @@ const string = str.replace(/\"/g,"\'");
 
       let sectionString = "";
       let x = (index + 1999);
-      while (string[x]!== '.' && x !== index){
+      while (string[x]!== '.' && string[x]!== '?' && string[x]!== '!' && x !== index){
         x--
       }
 
