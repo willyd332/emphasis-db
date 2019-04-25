@@ -1,12 +1,13 @@
 "use strict";
 
-const stringParser = require('stringParser')
-const extractData  = require('extractData')
-const compileData  = require('compileData')
-const engagementScoreCalc  = require('engagementScore')
+const stringParser         = require('js/stringParser')
+const extractData          = require('js/extractData')
+const compileData          = require('js/compileData')
+const engagementScoreCalc  = require('js/engagementScoreCalc')
 const axios        = require('axios');
 const url          = 'https://emphasis.ai/api/analysis_1/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 const apiCall = (array, index = 0) => {
   if (index === array.length){
     return
