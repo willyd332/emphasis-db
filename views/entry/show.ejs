@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <h1>ENTRY SHOW PAGE</h1>
+    <h2>Title: <%=entry.title%></h2>
+    <h2>Author: <%=entry.author%></h2>
+    <h2>Link: <%=entry.link%></h2>
+    <h2>Text: <%=entry.string%></h2>
+    <h2>Publication-Year: <%=entry.publicationYear%></h2>
+    <h2>Content-Type: <%=entry.contentType%></h2>
+    <h2>Publisher: <%=entry.publisher%></h2>
+    <ul>
+      <li>Yellow: <%=entry.data.yellow.percentage%>%</li>
+      <li>Blue: <%=entry.data.blue.percentage%>%</li>
+      <li>Green: <%=entry.data.green.percentage%>%</li>
+      <li>Light-Green: <%=entry.data.lightGreen.percentage%>%</li>
+      <li>Faded-Blue: <%=entry.data.fadedBlue.percentage%>%</li>
+    </ul>
+    <h2>Engagement Score: <%=entry.engagementScore%></h2>
+
+  </body>
+</html>
