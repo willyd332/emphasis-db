@@ -31,7 +31,7 @@ const sentenceArrayMaker = (array) => {
           sentence.color = 'lightGreen';
         }
 
-        for (let i = sectionString.index_begin; i <= sectionString.index_end; i++){
+        for (let i = sectionString.index_begin; i < sectionString.index_end; i++){
           sentence.text += paragraph.text[i]
         }
         sentenceArray.push(sentence);
