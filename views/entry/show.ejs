@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <% include ../partials/cssLinks.ejs %>
   </head>
   <body>
 
@@ -10,7 +11,13 @@
     <h2>Title: <%=entry.title%></h2>
     <h2>Author: <%=entry.author%></h2>
     <h2>Link: <%=entry.link%></h2>
-    <p class="text">Text:
+    <button id="hoverButton" type="button">HOVER VIEW</button>
+    <button id="allColorButton" type="button">ALL COLOR VIEW</button>
+    <button id="yellowButton" type="button">YELLOW ONLY</button>
+    <button id="greenButton" type="button">GREEN ONLY</button>
+    <button id="blueButton" type="button">BLUE ONLY</button>
+    <h2>Text:</h2>
+    <p class="text">
       <% for (let i = 0; i < text.length; i++) { %>
       <span class="<%=text[i].color%>"><%=text[i].text%></span>
       <% } %>

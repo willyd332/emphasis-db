@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title>Show user <%=user.displayname%></title>
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<% include ../partials/cssLinks.ejs %>
 </head>
 <body>
 
 	<h1>Show user <%=user.displayname%></h1>
 
 	<hr>
-	
+
 	<p>
 		Username: <%=user.username%></br>
 		Display name: <%=user.displayname%><br>
