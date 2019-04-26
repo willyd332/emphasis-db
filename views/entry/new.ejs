@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <% include ../partials/cssLinks.ejs %>
-  </head>
-  <body>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<% include ../partials/cssLinks.ejs %>
+	</head>
+	<body>
 
-    <h1>CREATE ENTRY</h1>
+		<% include ../partials/navbar.ejs %>
 
-    <form action="/entries" method="post">
-      Author: <input type="text" name="author"><br/>
-      Title: <input type="text" name="title"><br/>
-      Link: <input type="text" name="link"><br/>
-      <h4>STRING</h4>
-      <textarea name="string" rows="10" cols="100">
-      </textarea><br/>
-      Publication Year: <input type="number" name="publicationYear">
-      Content Type: <select type="text" name="contentType">
-                      <option value="news">News</option>
-                      <option value="fiction">Fiction</option>
-                      <option value="non-fiction">Non-Fiction</option>
-                      <option value="technical">Technical</option>
-                      <option value="marketing">Marketing</option>
-                      <option value="business">Business</option>
-                      <option value="entertainment">Entertainment</option>
-                      <option value="studentEssay">Student Essay</option>
-                    </select><br/>
-      Publisher: <input type="text" name="publisher"><br/>
-      <button type="submit">Submit Entry</button>
-    </form>
+	<br><br><br><br>
 
-  </body>
+
+	<div class="container">
+		<h2>CREATE ENTRY</h2>
+
+		<form action="/entries" method="post">
+			Author: 			<input type="text" name="author"><br/>
+			Title: 				<input type="text" name="title"><br/>
+			Link: 				<input type="text" name="link"><br/>
+			String: 			<input type="text" name="string"><br/>
+			Publication Year: 	<input type="number" name="publicationYear">
+			Content Type: 		<select type="text" name="contentType">
+									<option value="news">News</option>
+									<option value="fiction">Fiction</option>
+									<option value="non-fiction">Non-Fiction</option>
+									<option value="technical">Technical</option>
+									<option value="marketing">Marketing</option>
+									<option value="business">Business</option>
+									<option value="entertainment">Entertainment</option>
+									<option value="studentEssay">Student Essay</option>
+								</select><br/>
+			Publisher: 			<input type="text" name="publisher"><br/>
+			
+			<button type="submit">Submit Entry</button>
+		</form>
+
+		<% include ../partials/jsLinks.ejs %>
+
+
+	</body>
 </html>

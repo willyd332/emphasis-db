@@ -6,16 +6,26 @@
 </head>
 <body>
 
-	<h1>Show user <%=user.displayname%></h1>
+	<% include ../partials/navbar.ejs %>
 
-	<hr>
+	<br><br><br><br>
 
-	<p>
-		Username: <%=user.username%></br>
-		Display name: <%=user.displayname%><br>
-	</p>
 
-	<a href="/">Back to home</a>
+	<div class="container">
+		<h1>Show user <%=user.displayname%></h1>
+
+		<hr>
+
+		<p>
+			Username: <%=user.username%></br>
+			Display name: <%=user.displayname%><br>
+		</p>
+
+		<a href="/">Back to home</a>
+	</div>
+
+	<% include ../partials/jsLinks.ejs %>
+
 
 </body>
 </html>

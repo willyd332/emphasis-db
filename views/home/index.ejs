@@ -6,13 +6,25 @@
 </head>
 <body>
 
-	<h1>Home Page</h1>
+	<% include ../partials/navbar.ejs %>
 
-	<a href="/users">Show all users</a><br/>
-	<a href="/users/new">Create a new user</a><br/>
-	<a href="/auth/login">Log In</a><br/>
-	<a href="/auth/logout">Log Out</a><br/>
-	<a href="/entries/new">New Entry</a><br/>
+	<br><br><br><br>
+
+	<div class="container">
+		<div class="jumbotron">
+
+			<h2>Welcome to Emphasis-DB</h2>
+
+			<a href="/users">Show all users</a><br>
+			<a href="/users/new">Create a new user</a><br>
+			<a href="/auth/login">Log In</a><br>
+			<a href="/auth/logout">Log Out</a><br>
+			<a href="/entries/new">New Entry</a><br>
+
+			<% include ../partials/jsLinks.ejs %>
+
+		</div>
+	</div>
 
 </body>
 </html>

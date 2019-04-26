@@ -49,6 +49,7 @@ router.post('/', function(req, res) //POST route to create a new user!!
 		const userDbEntry =
 		{
 			username: lcusername,
+			usertype: null, //Standard users have a user type of null!!
 			email: req.body.email,
 			password: passwordHash,
 			displayname: req.body.displayname,
@@ -106,7 +107,7 @@ router.get('/:id/edit', function(req, res)
 		else
 		{
 			console.log(`GET /users/${req.params.id}/edit`);
-			res.render('users/edit.ejs', {user: userToEdit});
+			res.render('user/edit.ejs', {user: userToEdit});
 		}
 	});
 });
