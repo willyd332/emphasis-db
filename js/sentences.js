@@ -32,6 +32,8 @@ const sentenceArrayMaker = (array) => {
         for (let i = sectionString.index_begin; i < sectionString.index_end; i++){
           sentence.text += paragraph.text[i]
         }
+        sentence.text += ' ';
+        console.log(sentence.text);
         sentenceArray.push(sentence);
 
       })
