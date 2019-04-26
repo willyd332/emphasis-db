@@ -47,7 +47,8 @@ router.post('/login', function(req, res)
 				req.session.username = req.body.username;
 				req.session.logged = true;
 				console.log(`${req.body.username} login attempt: passwords match`);
-				//req.messages.userwelcome = `Welcome, ${req.session.username}!`;
+				req.session.messages.userwelcome = `Welcome, ${req.session.username}!`;
+				req.session.curuserid = foundUser._id;
 				res.redirect('/auth/login/success');
 			}
 			else
@@ -80,9 +81,13 @@ router.get('/logout', function(req, res)
 	else
 	{
 		//END the session:
+		const tempusername = req.session.username;
+		req.session.logged = false;
+		req.session.messages.userwelcome = "You are not logged in";
+		req.session.curuserid = null;
 		req.session.destroy();
-		//req.messages.userwelcome = "You are not signed in";
-		res.send(`You are now logged out!<br><a href="/">Go back to home page</a>`);
+		console.log(`${tempusername} is now logged out`)
+		res.send(`${tempusername}, you are now logged out!<br><a href="/">Back to home</a>`);
 	}
 });
 

@@ -20,8 +20,30 @@ app.use(session(
 	//TODO: what should this secret string be?
 	secret: "avmjlajurialajfrlirjalifjsadligjliajalerjalkejfidsjvlzkcxjvlaisjdifjsaf",
 	resave: false, //only save if there has been a change
-	saveUninitialized: false //only save if we have mutated the session - this is what should be done for logins
+	saveUninitialized: false, //only save if we have mutated the session - this is what should be done for logins
+	logged: false
 }));
+
+
+//The following function acts as middleware on ALL requests,
+//and is intended to monitor the session object in order
+//to make sure it's being made available to the ejs views,
+//and also to make sure the user login information is being
+//kept up to date!
+app.use(function(req, res, next)
+{
+	if (!req.session.logged)
+	{
+		req.session.messages =
+		{
+			userwelcome: "You are not logged in"
+		}
+		req.session.curuserid = null;
+	}
+	res.locals.session = req.session;
+	next();
+});
+
 
 
 app.use('/', normalRouter);

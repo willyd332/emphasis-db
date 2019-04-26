@@ -5,18 +5,29 @@
 	<% include ../partials/cssLinks.ejs %>
 </head>
 <body>
-	<h1>User Index</h1>
+	
+	<% include ../partials/navbar.ejs %>
 
-	<hr>
+	<br><br><br><br>
 
-	<%	for (let i = 0; i < users.length; i++) {	%>
-			<a href="/users/<%=users[i]._id%>"><%=users[i].username%></a><br>
-	<%	}	%>
 
-	<hr>
+	<div class="container">
+		<h1>User Index</h1>
 
-	<a href="/users/new">Create a new user account</a><br>
-	<a href="/">Back to home</a>
+		<hr>
+
+		<%	for (let i = 0; i < users.length; i++) {	%>
+				<a href="/users/<%=users[i]._id%>"><%=users[i].username%></a><br>
+		<%	}	%>
+
+		<hr>
+
+		<a href="/users/new">Create a new user account</a><br>
+		<a href="/">Back to home</a>
+	</div>
+
+	<% include ../partials/jsLinks.ejs %>
+
 
 </body>
 </html>
