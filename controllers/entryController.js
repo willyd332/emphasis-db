@@ -31,16 +31,56 @@ router.get('/new', function(req, res) {
 
 router.get('/', function(req, res) {
   //Index route for ALL entries
+  if (req.query.contentType){
+    let contentType;
+    let authorName;
+    let content;
+    let author;
+    if (req.query.contentType === 'all'){
+      contentType = {$exists: true};
+      content     = "ALL"
+    } else {
+      contentType = req.query.contentType;
+      content     = req.query.contentType;
+    }
+    if (req.query.authorName === 'ALL' || req.query.authorName === ''){
+      authorName = {$exists: true};
+      author     = "ALL"
+    } else {
+      authorName = req.query.authorName;
+      author     = req.query.authorName;
+    }
+    console.log(contentType);
+    console.log(authorName);
+    Entry.find({
+      'contentType': contentType,
+      'author': authorName
+    }, function(err, foundEntries) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(`GET /entries`);
+        res.render('entry/index.ejs', {
+          entries: foundEntries,
+          content: content,
+          author: author
+        });
+      }
+    });
+  } else {
   Entry.find({}, function(err, foundEntries) {
     if (err) {
       console.log(err);
     } else {
       console.log(`GET /entries`);
       res.render('entry/index.ejs', {
-        entries: foundEntries
+        entries: foundEntries,
+        content: 'ALL',
+        author: 'ALL'
       });
     }
   });
+}
 });
 
 router.post('/', async function(req, res) {
