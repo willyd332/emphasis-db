@@ -6,3 +6,26 @@ pre {
   display: inline;
   white-space: pre-line;
 }
+
+.indexSample {
+  height: 80px;
+  border-style: solid;
+  border-width: 10px;
+  background-color: #4DFC9C;
+}
+
+#filter {
+  position: fixed;
+  border-style: solid;
+  border-width: 10px;
+  border-color: black;
+  height: 80vh;
+}
+
+.inline {
+  display: inline-block;
+}
+
+#entriesIndex {
+  margin-left: 230px;
+}
