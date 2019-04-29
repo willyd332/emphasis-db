@@ -63,11 +63,11 @@ async function getNewsApi ()
 
 				const botUser = await User.findOne({username: "bot-newsapi"});
 				
-				if (!botUser._id)
+				if (!botUser)
 				{
 					//Uh-oh, the bot user does not exist!
 					console.log(`ERROR: Cannot find bot user with username 'bot-newsapi'`);
-					console.log(`(got ${botUser._id} for the id)`);
+					//console.log(`(got ${botUser._id} for the id)`);
 					return false;
 				}
 
