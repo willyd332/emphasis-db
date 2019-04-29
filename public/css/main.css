@@ -3,37 +3,47 @@ button {
 }
 
 body {
-  background-image: url('/images/blue.png');
   background-position: center;
   background-size: cover;
 }
 
 .navbar {
-  background-color: #CCFFE1;
+  background-image: url('/images/blue.png');
+  text-shadow: 1px 1px white;
+  color: black;
+  font-weight: bold;
 }
 
 pre {
   display: inline;
   white-space: pre-line;
+  font-family: 'Nanum Myeongjo', serif;
 }
 
 #filterBox {
-  background-color: #CCFFE1;
   height: 90vh;
   position: fixed;
   overflow: hidden;
   float: right;
+  display: flex;
+  align-items: center;
 }
 
 .filterOption {
   display: block;
   height: 100%;
-  width: 25%
+  width: 25%;
+  border-style: solid;
+  border-width: medium;
+  width: 100%;
+  padding: 15px;
+  vertical-align: middle;
+  margin-bottom: 100px;
+  text-align: center;
 }
 
 .entryLink {
-  background-color: red;
-  color: #598CF8
+ color: black;
 }
 
 .entry {
@@ -43,10 +53,9 @@ pre {
   margin: 5px;
   font-size: 13px;
   line-height: 2;
-  color: #333;
+  background-color: #cacbce;
   word-break: normal;
   word-wrap: normal;
-  background-color: #CCFFE1;;
   border: 1px solid #ccc;
   border-radius: 4px;
   height: 40vh;
@@ -57,7 +66,8 @@ pre {
   display: block;
   padding: 40px;
   margin: 0;
-  font-size: 13px;
+  font-size: 18px;
+  font-weight: bolder;
   line-height: 3;
   color: #333;
   word-break: normal;
@@ -77,7 +87,6 @@ pre {
   }
   #filterBox2{
     display: block;
-    background-color: #CCFFE1;
     position: fixed;
     height: 15vh;
     top: 15;
@@ -119,4 +128,25 @@ pre {
     height: 95vh;
     position: relative;
   }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+      font-family: 'Volkhov', serif;
+}
+
+h4 {
+    color: #598CF8;
+    text-shadow: 0px 0px 0px black;
+    font-weight: bold;
+    line-height: 1.5;
+}
+h5 {
+    color: #4DFC9C;
+    text-shadow: 0px 0px 1px black;
+    font-weight: bold;
+}
+h6 {
+    color: #FFF459;
+    text-shadow: 0px 0px 1px black;
+    font-weight: bold;
 }
