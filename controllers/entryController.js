@@ -36,7 +36,7 @@ router.get('/', function(req, res) {
     let authorName;
     let content;
     let author;
-    if (req.query.contentType === 'all'){
+    if (req.query.contentType === 'ALL'){
       contentType = {$exists: true};
       content     = "ALL"
     } else {
