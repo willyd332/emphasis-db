@@ -25,6 +25,7 @@
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "method-override": "^3.0.0",
-    "mongoose": "^5.5.3"
+    "mongoose": "^5.5.3",
+    "newspaperjs": "^1.0.6"
   }
 }

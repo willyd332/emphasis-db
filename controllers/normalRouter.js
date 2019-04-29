@@ -5,6 +5,7 @@ const userController = require('./userController');
 const authController = require('./authController');
 const homeController = require('./homeController');
 const entryController = require('./entryController');
+const botController = require('./botController');
 
 router.use(express.static('public'));
 
@@ -40,6 +41,12 @@ router.use('/entries', function(req, res, next)
 	//Here put things we want to send to the controller
 	next();
 }, entryController)
+
+router.use('/bot', function(req, res, next)
+{
+	//Here put things we want to send to the controller
+	next();
+}, botController)
 
 
 module.exports = router;
