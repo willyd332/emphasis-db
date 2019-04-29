@@ -39,6 +39,8 @@ app.use(function(req, res, next)
 			userwelcome: "You are not logged in"
 		}
 		req.session.curuserid = null;
+		req.session.username = null;
+		req.session.usertype = null;
 	}
 	res.locals.session = req.session;
 	next();

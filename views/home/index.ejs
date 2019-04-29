@@ -12,7 +12,9 @@
 
 	<div class="container">
 		<div class="jumbotron">
-
+			<%	if (session.usertype == 'bot') {	%>
+				<h4><font color=red><i>WARNING: You are logged in to a BOT ACCOUNT. Don't make any manual entries here unless you know what you are doing!</i></font></h4>
+			<%	}									%>
 			<h2>Welcome to Emphasis-DB</h2>
 
 			<a href="/users">Show all users</a><br>

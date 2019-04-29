@@ -3,127 +3,128 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const User = require('../models/userSchema');
 const Entry = require('../models/entrySchema');
-const stringParser = require('../js/stringParser')
-const extractData = require('../js/extractData')
-const compileData = require('../js/compileData')
-const sentenceArrayMaker = require('../js/sentences')
-const engagementScoreCalc = require('../js/engagementScoreCalc')
+const stringParser = require('../js/stringParser');
+const extractData = require('../js/extractData');
+const compileData = require('../js/compileData');
+const sentenceArrayMaker = require('../js/sentences');
+const engagementScoreCalc = require('../js/engagementScoreCalc');
+const stringSanitizer = require('../js/stringSanitizer');
 const axios = require('axios');
 const url = 'https://emphasis.ai/api/analysis_1/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const apiCall = async (array) => {
-  for (let i = 0; i < array.length; i++) {
-    await axios
-      .post(url, {
-        input: array[i].text
-      })
-      .then((analysis) => {
-        array[i].analysis = analysis.data;
-      })
-  }
-  return array
+	for (let i = 0; i < array.length; i++) {
+		await axios
+			.post(url, {
+				input: array[i].text
+			})
+			.then((analysis) => {
+				array[i].analysis = analysis.data;
+			})
+	}
+	return array
 }
 
 
 router.get('/new', function(req, res) {
-  res.render('entry/new.ejs')
+	res.render('entry/new.ejs')
 });
 
 router.get('/', function(req, res) {
-  //Index route for ALL entries
-  if (req.query.contentType){
-    let contentType;
-    let authorName;
-    let content;
-    let author;
-    if (req.query.contentType === 'ALL'){
-      contentType = {$exists: true};
-      content     = "ALL"
-    } else {
-      contentType = req.query.contentType;
-      content     = req.query.contentType;
-    }
-    if (req.query.authorName === 'ALL' || req.query.authorName === ''){
-      authorName = {$exists: true};
-      author     = "ALL"
-    } else {
-      authorName = req.query.authorName;
-      author     = req.query.authorName;
-    }
-    console.log(contentType);
-    console.log(authorName);
-    Entry.find({
-      'contentType': contentType,
-      'author': authorName
-    }, function(err, foundEntries) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(`GET /entries`);
-        res.render('entry/index.ejs', {
-          entries: foundEntries,
-          content: content,
-          author: author
-        });
-      }
-    });
-  } else {
-  Entry.find({}, function(err, foundEntries) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(`GET /entries`);
-      res.render('entry/index.ejs', {
-        entries: foundEntries,
-        content: 'ALL',
-        author: 'ALL'
-      });
-    }
-  });
+	//Index route for ALL entries
+	if (req.query.contentType){
+		let contentType;
+		let authorName;
+		let content;
+		let author;
+		if (req.query.contentType === 'ALL'){
+			contentType = {$exists: true};
+			content     = "ALL"
+		} else {
+			contentType = req.query.contentType;
+			content     = req.query.contentType;
+		}
+		if (req.query.authorName === 'ALL' || req.query.authorName === ''){
+			authorName = {$exists: true};
+			author     = "ALL"
+		} else {
+			authorName = req.query.authorName;
+			author     = req.query.authorName;
+		}
+		console.log(contentType);
+		console.log(authorName);
+		Entry.find({
+			'contentType': contentType,
+			'author': authorName
+		}, function(err, foundEntries) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(`GET /entries`);
+				res.render('entry/index.ejs', {
+					entries: foundEntries,
+					content: content,
+					author: author
+				});
+			}
+		});
+	} else {
+	Entry.find({}, function(err, foundEntries) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(`GET /entries`);
+			res.render('entry/index.ejs', {
+				entries: foundEntries,
+				content: 'ALL',
+				author: 'ALL'
+			});
+		}
+	});
 }
 });
 
 router.post('/', async function(req, res) {
 
-  try {
-    const newEntry = await Entry.create({
-      userId: req.session.currUserId,
-      author: req.body.author,
-      title: req.body.title,
-      link: req.body.link,
-      string: req.body.string,
-      publicationYear: req.body.publicationYear,
-      contentType: req.body.contentType,
-      publisher: req.body.publisher,
-      text: [],
-      data: {},
-      sentences: [],
-      engagementScore: null
-    });
+	try {
+		const newEntry = await Entry.create({
+			userId: req.session.currUserId,
+			author: req.body.author,
+			title: req.body.title,
+			link: req.body.link,
+			string: req.body.string,
+			publicationYear: req.body.publicationYear,
+			contentType: req.body.contentType,
+			publisher: req.body.publisher,
+			text: [],
+			data: {},
+			sentences: [],
+			engagementScore: null
+		});
 
-    let sectionsArray = stringParser(req.body.string);
-    sectionsArray = await apiCall(sectionsArray);
-    sectionsArray.forEach((section) => {
-      section.data = extractData(section);
-    })
-    const entryData = compileData(sectionsArray)
+		let sectionsArray = stringParser(req.body.string);
+		sectionsArray = await apiCall(sectionsArray);
+		sectionsArray.forEach((section) => {
+			section.data = extractData(section);
+		})
+		const entryData = compileData(sectionsArray)
 
-    const engagementScore = engagementScoreCalc(entryData)
+		const engagementScore = engagementScoreCalc(entryData)
 
-    const updatedEntry = await Entry.findByIdAndUpdate(newEntry._id, {
-      text: sectionsArray,
-      data: entryData,
-      engagementScore: engagementScore
-    }, {
-      new: true
-    })
-    const id = updatedEntry._id;
-    res.redirect(`entries/${id}`)
+		const updatedEntry = await Entry.findByIdAndUpdate(newEntry._id, {
+			text: sectionsArray,
+			data: entryData,
+			engagementScore: engagementScore
+		}, {
+			new: true
+		})
+		const id = updatedEntry._id;
+		res.redirect(`entries/${id}`)
 
-  } catch (err) {
-    console.log(err);
-    res.send(err);
-  }
+	} catch (err) {
+		console.log(err);
+		res.send(err);
+	}
 })
 router.get('/:id', function(req, res)
 {
@@ -138,11 +139,11 @@ router.get('/:id', function(req, res)
 		if (err) {console.log(err);}
 		else
 		{
-      const text = sentenceArrayMaker(foundEntry.text)
+			const text = sentenceArrayMaker(foundEntry.text)
 			res.render('entry/show.ejs', {
-        entry: foundEntry,
-        text: text
-      });
+				entry: foundEntry,
+				text: text
+			});
 		}
 	});
 

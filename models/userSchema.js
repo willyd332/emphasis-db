@@ -21,7 +21,6 @@ const userSchema = new Schema
 	    type: String,
 	    required: true
 	  },
-		userType: String,
 	  displayname: {
 	    type: String,
 	    required: true
@@ -30,7 +29,7 @@ const userSchema = new Schema
 	    type: Schema.Types.ObjectId,
 	    ref: 'Entry'
 	  }]
-	});
+});
 
 
 

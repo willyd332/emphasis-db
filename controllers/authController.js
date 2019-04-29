@@ -46,6 +46,7 @@ router.post('/login', function(req, res)
 				//Passwords MATCH!
 				req.session.username = req.body.username;
 				req.session.logged = true;
+				req.session.usertype = foundUser.usertype;
 				console.log(`${req.body.username} login attempt: passwords match`);
 				req.session.messages.userwelcome = `Welcome, ${req.session.username}!`;
 				req.session.curuserid = foundUser._id;
@@ -83,6 +84,7 @@ router.get('/logout', function(req, res)
 		//END the session:
 		const tempusername = req.session.username;
 		req.session.logged = false;
+		req.session.usertype = null;
 		req.session.messages.userwelcome = "You are not logged in";
 		req.session.curuserid = null;
 		req.session.destroy();
