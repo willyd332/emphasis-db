@@ -49,7 +49,7 @@ router.post('/', function(req, res) //POST route to create a new user!!
 		const userDbEntry =
 		{
 			username: lcusername,
-			usertype: null, //Standard users have a user type of null!!
+			usertype: req.body.usertype,
 			email: req.body.email,
 			password: passwordHash,
 			displayname: req.body.displayname,
@@ -100,16 +100,22 @@ router.get('/:id', function(req, res)
 
 router.get('/:id/edit', function(req, res)
 {
-
-	User.findById(req.params.id, function(err, userToEdit)
+	if (req.session.curuserid == req.params.id || req.session.usertype == 'admin')
 	{
-		if (err) {console.log(err);}
-		else
+		User.findById(req.params.id, function(err, userToEdit)
 		{
-			console.log(`GET /users/${req.params.id}/edit`);
-			res.render('user/edit.ejs', {user: userToEdit});
-		}
-	});
+			if (err) {console.log(err);}
+			else
+			{
+				console.log(`GET /users/${req.params.id}/edit`);
+				res.render('user/edit.ejs', {user: userToEdit});
+			}
+		});
+	}
+	else
+	{
+		res.send(`You can't edit the settings for a user you're not logged in as!<br><a href="/">Back to home</a>`);
+	}
 });
 
 router.put('/:id', function(req, res)

@@ -16,13 +16,53 @@
 	<div class="container">
 		<hr>
 
-		<h2>Editing Account Settings for <%=session.username%></h2>
+		<h2>Editing Account Settings for <%=user.username%></h2>
 
-		<%	if (session.usertype === 'admin') {	%>
-			<p>You are an administrator</p><br>
-		<%	}									%>
+		<%	if (user.usertype === 'admin') {			%>
+				<h3><font color=green><i>This is an administrator account</i></font></h3><br>
+		<%	}											%>
+		<%	if (user.usertype === 'research') {			%>
+				<h3><font color=blue><i>This account is research-enabled</i></font></h3><br>
+		<%	}											%>
+		<%	if (user.usertype === 'bot') {				%>
+				<h3><font color=red><i>This is a BOT ACCOUNT!</i></font></h3><br>
+		<%		if (session.curuserid == user._id) {	%>
+					<p>WARNING: You are logged in AS the bot. Don't make any entries this way unless you know what you are doing.</p>
+		<%		}										%>
+		<%	}											%>
+
+		<%	if (session.curuserid == user._id && session.usertype == 'admin') {		%>
+				<font color=darkred><h4>Admin message: This is your account</h4></font><br>
+		<%	}																		%>
 
 		<form action="/users/<%=user._id%>?_method=PUT" method="POST">
+			User type:
+			<select type="text" name="usertype">
+				<%	if (user.usertype == 'std') {		%>
+					<option value="std" selected>Standard</option>
+					<option value="admin">Administrator</option>
+					<option value="research">Researcher</option>
+					<option value="bot">Bot</option>
+				<%	}									%>
+				<%	if (user.usertype == 'admin') {		%>
+					<option value="std">Standard</option>
+					<option value="admin" selected>Administrator</option>
+					<option value="research">Researcher</option>
+					<option value="bot">Bot</option>
+				<%	}									%>
+				<%	if (user.usertype == 'research') {		%>
+					<option value="std">Standard</option>
+					<option value="admin">Administrator</option>
+					<option value="research" selected>Researcher</option>
+					<option value="bot">Bot</option>
+				<%	}									%>
+				<%	if (user.usertype == 'bot') {		%>
+					<option value="std">Standard</option>
+					<option value="admin">Administrator</option>
+					<option value="research">Researcher</option>
+					<option value="bot" selected>Bot</option>
+				<%	}									%>
+			</select><br>
 			Your username (unique, non-case-sensitive, should be all lowercase):<br>
 			<input type="text" name="username" value="<%=user.username%>"></input><br>
 			Your email address (must be a valid email address):<br>
@@ -32,9 +72,15 @@
 			<button type="submit">Submit</button><br>
 		</form>
 
+		<hr>
+
 		<form action="/auth/delete" method="GET">
-			The following button will take you to a page where you can delete your account:
+			The following button will take you to a page where you can delete your account:<br>
 			<button type="submit">Delete your account</button><br>
+			<%	if (session.curuserid != user._id && session.usertype === 'admin') {			%>
+			NOTE: You are an admin, editing a user that is not your own. This button<br>
+			will take you to the delete page for YOUR account only, not this one.
+			<%	}																				%>
 		</form>
 
 

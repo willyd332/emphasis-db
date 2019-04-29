@@ -17,7 +17,11 @@
 		<hr>
 
 		<%	for (let i = 0; i < users.length; i++) {	%>
-				<a href="/users/<%=users[i]._id%>"><%=users[i].username%></a><br>
+				<a href="/users/<%=users[i]._id%>"><%=users[i].username%></a>
+		<%	if (session.usertype === 'admin') {			%>
+				<form action="/users/<%=users[i].id%>/edit" method="GET"><button type="submit">Edit this user's account settings</button></form>
+		<%	}											%>
+				<br>
 		<%	}	%>
 
 		<hr>
