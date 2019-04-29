@@ -8,12 +8,44 @@
 	<body>
 
 	<br><br><br><br>
-<div class="row">
-<div class="col-md-2" id="filter">
-  <h1>FILTER ENTRIES</h1>
-  <br>
-  <br>
+
+<div class="container-fluid">
+
+
+  <div class="container col-sm-2" id="filterBox">
   <form action="/entries" method="get">
+
+    <div class="filterOption">
+      <h4>Content Type</h4>
+      <select name="contentType">
+        <option value="<%=content%>"><%=content%></option>
+        <option value="news">News</option>
+        <option value="fiction">Fiction</option>
+        <option value="non-fiction">Non-Fiction</option>
+        <option value="technical">Technical</option>
+        <option value="marketing">Marketing</option>
+        <option value="business">Business</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="studentEssay">Student Essay</option>
+        <option value="ALL">ALL</option>
+      </select>
+    </div>
+
+    <div class="filterOption">
+    <h4>Author Name</h4>
+    <input type="text" name="authorName" value="<%=author%>">
+    </div>
+
+    <div class="filterOption">
+      <button type="submit">Filter Entries</button>
+    </div>
+  </form>
+</div>
+
+<div class="col-sm-11 " id="filterBox2">
+<form action="/entries" method="get">
+
+  <div class="col-md-3 filterOption">
     <h4>Content Type</h4>
     <select name="contentType">
       <option value="<%=content%>"><%=content%></option>
@@ -27,52 +59,38 @@
       <option value="studentEssay">Student Essay</option>
       <option value="ALL">ALL</option>
     </select>
-    <br>
-    <br>
-    <br>
-    <!-- <h4>Entry Length</h4>
-    <select name="stringLength">
-      <option value="all">ALL</option>
-      <option value="100">less than 100 Characters</option>
-      <option value="500">less than 500 Characters</option>
-      <option value="1000">less than 1,000 Characters</option>
-      <option value="5000">less than 5,000 Characters</option>
-      <option value="10000">less than 10,000 Characters</option>
-      <option value="20000">less than 20,000 Characters</option>
-      <option value="50000">less than 50,000 Characters</option>
-      <option value="100000">less than 100,000 Characters</option>
-    </select> -->
-    <br>
-    <br>
-    <br>
-    <h4>Author Name</h4>
-    <input type="text" name="authorName" value="<%=author%>">
-    <br>
-    <br>
-    <br>
+  </div>
+
+  <div class="col-md-3 filterOption">
+  <h4>Author Name</h4>
+  <input type="text" name="authorName" value="<%=author%>">
+  </div>
+
+  <div class="col-md-3 filterOption">
     <button type="submit">Filter Entries</button>
-  </form>
-
-
+  </div>
+</form>
 </div>
-<div class="container" class="col-md-6" id="entriesIndex">
-      <% for (let i = 0; i < entries.length; i++) {%>
 
-        <a href="/entries/<%=entries[i]._id%>">
-        <div class="col-md-4">
-            <div class="row">
+<div class="col-sm-11" id="entriesIndex">
+      <% for (let i = 0; i < entries.length; i++) {%>
+        <div class="col-md-3 entry">
+        <a href="/entries/<%=entries[i]._id%>" class="entryLink">
+        <div class="col-md-12">
             <h4><%=entries[i].title%></h4>
             <h5><%=entries[i].author%></h5>
             <h6><%=entries[i].string.length%> Characters</h6>
             <p class="col-md-12">
               <%=entries[i].text[0].text%>
             </p>
-            </div>
         </div>
         </a>
+      </div>
       <%}%>
   </div>
+
 </div>
+
 
     <% include ../partials/navbar.ejs %>
   </body>
