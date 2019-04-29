@@ -2,39 +2,72 @@ button {
   display: inline-block;
 }
 
+body {
+  background-position: center;
+  background-size: cover;
+}
+
+.navbar {
+  background-image: url('/images/blue.png');
+  text-shadow: 1px 1px white;
+  color: black;
+  font-weight: bold;
+}
+
 pre {
   display: inline;
   white-space: pre-line;
+  font-family: 'Nanum Myeongjo', serif;
 }
 
-.indexSample {
-  height: 80px;
-  border-style: solid;
-  border-width: 10px;
-  background-color: #4DFC9C;
-}
-
-#filter {
+#filterBox {
+  height: 90vh;
   position: fixed;
+  overflow: hidden;
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.filterOption {
+  display: block;
+  height: 100%;
+  width: 25%;
   border-style: solid;
-  border-width: 10px;
-  border-color: black;
-  height: 80vh;
+  border-width: medium;
+  width: 100%;
+  padding: 15px;
+  vertical-align: middle;
+  margin-bottom: 100px;
+  text-align: center;
 }
 
-.inline {
+.entryLink {
+ color: black;
+}
+
+.entry {
+  float: right;
   display: inline-block;
-}
-
-#entriesIndex {
-  margin-left: 230px;
+  padding: 10px;
+  margin: 5px;
+  font-size: 13px;
+  line-height: 2;
+  background-color: #cacbce;
+  word-break: normal;
+  word-wrap: normal;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 40vh;
+  overflow: hidden;
 }
 
 #preDis {
   display: block;
   padding: 40px;
   margin: 0;
-  font-size: 13px;
+  font-size: 18px;
+  font-weight: bolder;
   line-height: 3;
   color: #333;
   word-break: normal;
@@ -42,4 +75,78 @@ pre {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+#filterBox2 {
+  display: none;
+}
+
+@media (max-width: 990px) {
+  #filterBox {
+    display: none;
+  }
+  #filterBox2{
+    display: block;
+    position: fixed;
+    height: 15vh;
+    top: 15;
+    text-align: center;
+    float: none;
+    border-radius: 4px;
+    margin: auto;
+  }
+  #entriesIndex {
+    height: 70vh;
+    overflow: scroll;
+    position: absolute;
+    bottom: 0;
+    float: none;
+    margin: auto;
+    text-align: center;
+  }
+  .filterOption {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    font-size: 13px;
+    line-height: 2;
+    border-radius: 4px;
+    height: 40vh;
+    overflow: hidden;
+  }
+  .entry {
+    float: none;
+    margin: auto;
+  }
+}
+
+@media (max-width: 770px){
+  #filterBox2{
+    display: none;
+  }
+  #entriesIndex {
+    height: 95vh;
+    position: relative;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+      font-family: 'Volkhov', serif;
+}
+
+h4 {
+    color: #598CF8;
+    text-shadow: 0px 0px 0px black;
+    font-weight: bold;
+    line-height: 1.5;
+}
+h5 {
+    color: #4DFC9C;
+    text-shadow: 0px 0px 1px black;
+    font-weight: bold;
+}
+h6 {
+    color: #FFF459;
+    text-shadow: 0px 0px 1px black;
+    font-weight: bold;
 }
