@@ -16,7 +16,7 @@
 		<h1>ENTRY SHOW PAGE</h1>
 		<h2>Title: <%=entry.title%></h2>
 		<h2>Author: <%=entry.author%></h2>
-		<h2>Link: <%=entry.link%></h2>
+		<h2><a href="<%=entry.link%>">LINK TO ORIGINAL</a></h2>
 		<button id="hoverButton" type="button">HOVER VIEW</button>
 		<button id="allColorButton" type="button">ALL COLOR VIEW</button>
 		<button id="yellowButton" type="button">YELLOW ONLY</button>
@@ -24,7 +24,7 @@
 		<button id="blueButton" type="button">BLUE ONLY</button>
 		<h2>Text:</h2>
 		<p class="text">
-    <pre>
+    <pre id="preDis">
 			<% for (let i = 0; i < text.length; i++) { %><span class="<%=text[i].color%>"><%=text[i].text%></span><% } %>
     </pre>
 		</p>
