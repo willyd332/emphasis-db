@@ -88,15 +88,30 @@ pre {
   #filterBox2{
     display: block;
     position: fixed;
-    height: 15vh;
+    margin-top: 50px;
+    height: 5vh;
     top: 15;
+    flex: none;
     text-align: center;
     float: none;
     border-radius: 4px;
     margin: auto;
   }
+  .filterOption {
+    display: block;
+    height: 5%;
+    width: 30%;
+    border-style: none;
+    padding: 3px;
+    vertical-align: middle;
+    margin-bottom: 0px;
+    text-align: center;
+  }
+  button{
+    margin-top: 40px;
+  }
   #entriesIndex {
-    height: 70vh;
+    height: 75vh;
     overflow: scroll;
     position: absolute;
     bottom: 0;
