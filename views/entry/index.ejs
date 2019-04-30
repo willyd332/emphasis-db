@@ -121,7 +121,9 @@
 <div class="container selectPage col-md-12">
   <div class="col-md-12 pageForm">
     <form action="/entries" method="get">
-        <% let base = pageNum - 5;%>
+      <input style="display:none" name="contentType" value="<%=content%>">
+      <input style="display:none" name="authorName" value="<%=author%>">
+        <% let base = pageNum - 2;%>
         <% let top = pageNum + 5;%>
         <% if (top > (totalEnt.length/16)){top = (totalEnt.length/16)} %>
         <% if (base <= 0){base = 1} %>
