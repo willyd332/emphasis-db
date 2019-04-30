@@ -53,7 +53,7 @@ async function getNewsApi ()
 
 		for (let i = 0; i < topHeadlines.length; i++){
 
-			if (topHeadlines[i].source.name !== "Newsweek" || topHeadlines[i].source.name !== "CNN") { //(BLACKLIST)
+			if (topHeadlines[i].source.name !== "Newsweek" && topHeadlines[i].source.name !== "CNN") { //(BLACKLIST)
 
 				let result = await Article(topHeadlines[i].url)
 				let publicationYear = getYear(topHeadlines[i].publishedAt)
