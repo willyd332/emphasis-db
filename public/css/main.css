@@ -8,10 +8,17 @@ body {
 }
 
 .navbar {
-  background-image: url('/images/blue.png');
-  text-shadow: 1px 1px white;
   color: black;
   font-weight: bold;
+  height: 80px
+}
+
+.mainlogo {
+  width:80px;
+  height:80px;
+  position:absolute;
+  border-radius:15px;
+  margin-left: 2%;
 }
 
 pre {
