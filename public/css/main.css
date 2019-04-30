@@ -55,6 +55,10 @@ input {
   width: 100%;
 }
 
+.entryInput {
+  width: 70vw;
+}
+
 .filterOption {
   display: block;
   height: 100%;
