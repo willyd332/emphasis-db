@@ -10,7 +10,7 @@ router.get('/', function(req, res)
 	if (req.session.username){
 	res.render('home/index.ejs');
 } else {
-	res.render('home/login.ejs');
+	res.redirect('/auth/login');
 }
 });
 
