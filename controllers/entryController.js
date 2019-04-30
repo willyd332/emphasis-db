@@ -150,7 +150,7 @@ router.post('/', async function(req, res) {
 
 	try {
 		const newEntry = await Entry.create({
-			userId: req.session.currUserId,
+			userId: req.session.curuserid,
 			author: req.body.author,
 			title: req.body.title,
 			link: req.body.link,
@@ -246,6 +246,59 @@ router.put('/:id', function(req, res)
 	});
 });
 
+router.get('/:id/delete', function(req, res)
+{
+	Entry.findById(res.params.id, function(err, foundEntry)
+	{
+		if (err) {console.log(err);}
+		else
+		{
+			if (req.session.curuserid === foundEntry.userId || req.session.usertype === 'admin')
+			{
+				res.render('entries/delete.ejs', {entry: foundEntry});
+			}
+			else
+			{
+				res.send(`You don't have the authority to do this!!<br><a href="/">Back to home</a>`);
+			}
+		}
+	});
+});
+
+router.delete('/:id', function(req, res)
+{
+	//DELETE route for deleting an entry
+	//Checks session to make sure the current user
+	//has the authority to delete the entry
+
+	Entry.findById(res.params.id, function(err, foundEntry)
+	{
+		if (err) {console.log(err);}
+		else
+		{
+			if (req.session.curuserid === foundEntry.userId || req.session.usertype === 'admin')
+			{
+				//Now we know the user is either the one who created this entry,
+				//or is an administrator!
+
+				//Delete the entry:
+				Entry.findByIdAndDelete(res.params.id, function(err, deletedEntry)
+				{
+					if (err) {console.log(err);}
+					else
+					{
+						//The entry has now been deleted
+						res.redirect('/entries');
+					}
+				});
+			}
+			else
+			{
+				res.send(`You don't have the authority to do this!!<br><a href="/">Back to home</a>`);
+			}
+		}
+	});
+});
 
 
 
