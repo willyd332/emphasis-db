@@ -15,10 +15,27 @@
 			<%	if (session.usertype == 'bot') {	%>
 				<h4><font color=red><i>WARNING: You are logged in to a BOT ACCOUNT. Don't make any manual entries here unless you know what you are doing!</i></font></h4>
 			<%	}									%>
-			<h2 class="welcome">Welcome to Emphasis-DB</h2>
+			
+			<%	if (!session.logged) {				%>
+					<h2 class="welcome">Welcome to Emphasis-DB</h2>
+			<%	}									%>
+			<%	if (session.logged) {								%>
+					<h2 class="welcome">Welcome to Emphasis-DB, <%=session.username%></h2>
+			<%	}									%>
 
-			<a href="/users/new">Register</a><br>
-			<a href="/auth/login">Log In</a><br>
+			<%	if (!session.logged) {				%>
+				<a href="/users/new">Register</a><br>
+				<a href="/auth/login">Log In</a><br>
+			<%	}									%>
+
+			<%	if (session.usertype === 'admin') {		%>
+					<hr>
+					<h3>Administrator control panel:</h3>
+					<br>
+					<a href="/users">User Index</a><br>
+					<a href="/users/new">Create a new user</a><br>
+					<a href="/bots/index">Bot Index</a><br>
+			<%	}										%>
 
 			<% include ../partials/jsLinks.ejs %>
 
