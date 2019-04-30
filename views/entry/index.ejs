@@ -11,8 +11,9 @@
 
 <div class="container-fluid">
 
+<div class="row">
 
-  <div class="container col-sm-2" id="filterBox">
+  <div class="col-md-2" id="filterBox">
   <form action="/entries" method="get">
 
     <div class="filterOption">
@@ -41,7 +42,10 @@
     </div>
   </form>
 </div>
+<div class="col-sm-10">
 
+</div>
+</div>
 <div class="col-sm-11 " id="filterBox2">
 <form action="/entries" method="get">
 
@@ -71,8 +75,7 @@
   </div>
 </form>
 </div>
-
-<div class="col-sm-11" id="entriesIndex">
+<div class="col-md-11" id="entriesIndex">
       <% for (let i = 0; i < entries.length; i++) {%>
         <div class="col-md-3 entry">
         <a href="/entries/<%=entries[i]._id%>" class="entryLink">

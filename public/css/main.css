@@ -29,12 +29,13 @@ pre {
   align-items: center;
 }
 
+input {
+  width: 100%;
+}
+
 .filterOption {
   display: block;
   height: 100%;
-  width: 25%;
-  border-style: solid;
-  border-width: medium;
   width: 100%;
   padding: 15px;
   vertical-align: middle;
@@ -118,6 +119,7 @@ pre {
     float: none;
     margin: auto;
     text-align: center;
+    background-color: none;
   }
   .filterOption {
     display: inline-block;
