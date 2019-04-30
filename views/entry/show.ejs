@@ -22,7 +22,8 @@
 		<h2><a href="<%=entry.link%>">LINK TO ORIGINAL</a></h2>
 
 		<%	if (session.curuserid === entry.userId || session.usertype === 'admin') {	%>
-				<h2><a href="<%=entry.link%>">DELETE THIS ENTRY</a></h2>
+				<h2><a href="/entries/<%=entry._id%>/edit">EDIT THIS ENTRY</a></h2>
+				<h2><a href="/entries/<%=entry._id%>/delete">DELETE THIS ENTRY</a></h2>
 		<%	}																			%>
 
 		<h2>Publication Year: <%=entry.publicationYear%></h2>
