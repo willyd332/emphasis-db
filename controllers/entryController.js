@@ -44,8 +44,15 @@ router.get('/', function(req, res) {
 	if (req.query.contentType){
 		let contentType;
 		let authorName;
+		let publicationYear;
+		let pbYear;
+		let publisherName;
+		let engagement;
+		let engagementScore;
+		let engagementNumber;
 		let content;
 		let author;
+		let publisher;
 		if (req.query.contentType === 'ALL'){
 			contentType = {$exists: true};
 			content     = "ALL"
@@ -60,9 +67,36 @@ router.get('/', function(req, res) {
 			authorName = req.query.authorName;
 			author     = req.query.authorName;
 		}
+		if (req.query.publisher === 'ALL' || req.query.publisher === ''){
+			publisherName = {$exists: true};
+			publisher     = "ALL"
+		} else {
+			publisherName = req.query.publisher;
+			publisher  = req.query.publisher;
+		}
+		if (!req.query.publicationYear){
+			publicationYear = {$exists: true};
+			pbYear = null;
+		} else {
+			publicationYear = req.query.publicationYear;
+			pbYear = req.query.publicationYear;
+		}
+		if  (req.query.engagementScore === 'ALL'){
+			engagementScore = {'engagementScore':{$exists: true}};
+			engagement = null;
+		} else {
+			console.log(req.query.engagementScore + "THISI SI THE SCORE");
+			engagementNumber = parseInt(req.query.engagementScore)
+			engagementScore = [{'engagementScore':{$gte: engagementNumber}},{'engagementScore':{$lte: engagementNumber + 10}}]
+			engagement = req.query.engagementScore;
+		}
+		console.log(engagementScore);
 		Entry.find({
 			'contentType': contentType,
-			'author': authorName
+			'author': authorName,
+			'publisher': publisherName,
+			'publicationYear': publicationYear,
+			$and: engagementScore
 		}, function(err, foundEntries) {
 			if (err) {
 				console.log(err);
@@ -74,13 +108,15 @@ router.get('/', function(req, res) {
 					pageNumber = 1;
 				}
 				const entriesArray = splitEntries(pageNumber, foundEntries);
-				console.log(entriesArray);
 				res.render('entry/index.ejs', {
 					pageNum: pageNumber,
 					entries: entriesArray,
 					totalEnt: foundEntries,
 					content: content,
-					author: author
+					author: author,
+					publisher: publisher,
+					pbYear: pbYear,
+					engagement: engagement
 				});
 			}
 		});
@@ -101,7 +137,9 @@ router.get('/', function(req, res) {
 				pageNum: pageNumber,
 				totalEnt: foundEntries,
 				content: 'ALL',
-				author: 'ALL'
+				author: 'ALL',
+				publisher: 'ALL',
+				pbYear: null
 			});
 		}
 	});
@@ -187,7 +225,6 @@ router.get('/:id/edit', function(req, res)
 		if (err) {console.log(err);}
 		else
 		{
-			console.log(`GET /entries/${req.params.id}/edit`);
 			res.render('entry/edit.ejs', {entry: foundEntry});
 		}
 	});
@@ -204,7 +241,6 @@ router.put('/:id', function(req, res)
 		if (err) {console.log(err);}
 		else
 		{
-			console.log(`PUT /entries/${req.params.id}`);
 			res.redirect('/entries');
 		}
 	});

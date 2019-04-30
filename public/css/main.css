@@ -28,7 +28,6 @@ pre {
   margin-top: 50px;
   height: 100px;
   display: block;
-  mar
 }
 
 .pageForm {
@@ -37,6 +36,7 @@ pre {
 
 #filterBox {
   height: 90vh;
+  top: 50px;
   position: fixed;
   overflow: hidden;
   float: right;
@@ -54,7 +54,6 @@ input {
   width: 100%;
   padding: 15px;
   vertical-align: middle;
-  margin-bottom: 100px;
   text-align: center;
 }
 
@@ -114,9 +113,9 @@ h4 {
     line-height: 1.5;
 }
 .entryInfo {
-  width: 80%;
+  width: 30%;
   height: 40px;
-  display: block;
+  display: inline-block;
 }
 
 
@@ -134,27 +133,53 @@ h4 {
   #filterBox {
     display: none;
   }
-  #filterBox2{
+  .entryTitle{
+    display: none;
+  }
+  .selectPage {
+    height: 80px;
+    width: 100%;
     display: block;
+    position: absolute;
+    bottom: 0;
+    background: white
+  }
+  .pageForm {
+    text-align: center;
+    height: 10px;
+  }
+  #filterBox2 h5{
+        color: #598CF8;
+        font-size: 15px;
+        text-align: center;
+        text-shadow: 0px 0px 0px black;
+        font-weight: bold;
+        line-height: 1.5;
+    }
+  #filterBox2{
+    display: inline-block;
     position: fixed;
-    margin-top: 50px;
-    height: 5vh;
-    top: 15;
+    top: 65px;
+    margin-top: 0px;
+    height: 15vh;
     flex: none;
     text-align: center;
     float: none;
     border-radius: 4px;
     margin: auto;
   }
+  #filterBox2 input {
+    width: 50px;
+  }
   .filterOption {
-    display: block;
+    display: inline-block;
     height: 5%;
-    width: 30%;
+    width: 15%;
     border-style: none;
-    padding: 3px;
+    padding: 1px;
     vertical-align: middle;
     margin-bottom: 0px;
-    text-align: center;
+    float: left;
   }
   button{
     margin-top: 40px;
