@@ -24,7 +24,14 @@ const apiCall = async (array) => {
 	}
 	return array
 }
-
+const splitEntries = (num,array) => {
+	const number = (num * 16);
+	const newArray = [];
+	for (let i = (number - 16); i < number; i++){
+		newArray.push(array[i])
+	}
+	return newArray
+}
 
 router.get('/new', function(req, res) {
 	res.render('entry/new.ejs')
@@ -51,8 +58,6 @@ router.get('/', function(req, res) {
 			authorName = req.query.authorName;
 			author     = req.query.authorName;
 		}
-		console.log(contentType);
-		console.log(authorName);
 		Entry.find({
 			'contentType': contentType,
 			'author': authorName
@@ -60,9 +65,17 @@ router.get('/', function(req, res) {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(`GET /entries`);
+				let pageNumber;
+				if (req.query.number){
+					pageNumber = req.query.number;
+				} else {
+					pageNumber = 1;
+				}
+				const entriesArray = splitEntries(pageNumber, foundEntries);
 				res.render('entry/index.ejs', {
-					entries: foundEntries,
+					pageNum: pageNumber,
+					entries: entriesArray,
+					totalEnt: foundEntries,
 					content: content,
 					author: author
 				});
@@ -73,9 +86,17 @@ router.get('/', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(`GET /entries`);
+			let pageNumber;
+			if (req.query.number){
+				pageNumber = req.query.number;
+			} else {
+				pageNumber = 1;
+			}
+			const entriesArray = splitEntries(pageNumber, foundEntries);
 			res.render('entry/index.ejs', {
-				entries: foundEntries,
+				entries: entriesArray,
+				pageNum: pageNumber,
+				totalEnt: foundEntries,
 				content: 'ALL',
 				author: 'ALL'
 			});

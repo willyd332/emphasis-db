@@ -20,6 +20,17 @@ pre {
   font-family: 'Nanum Myeongjo', serif;
 }
 
+.selectPage {
+  margin-top: 50px;
+  height: 100px;
+  display: block;
+  mar
+}
+
+.pageForm {
+  text-align: center;
+}
+
 #filterBox {
   height: 90vh;
   position: fixed;
@@ -47,14 +58,18 @@ input {
  color: black;
 }
 
+.entryTitle {
+  text-align: center;
+}
+
 .entry {
-  float: right;
+  /* float: right; */
   display: inline-block;
   padding: 10px;
   margin: 5px;
   font-size: 13px;
   line-height: 2;
-  background-color: #cacbce;
+  background-color: #e8e8e8;
   word-break: normal;
   word-wrap: normal;
   border: 1px solid #ccc;
@@ -81,6 +96,35 @@ input {
 #filterBox2 {
   display: none;
 }
+
+h1, h2, h3, h4, h5, h6, p {
+      font-family: 'Volkhov', serif;
+}
+
+h4 {
+    color: #598CF8;
+    font-size: 14px;
+    text-align: center;
+    text-shadow: 0px 0px 0px black;
+    font-weight: bold;
+    line-height: 1.5;
+}
+.entryInfo {
+  width: 80%;
+  height: 40px;
+  display: block;
+}
+
+
+.welcome {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.entryPDisplay {
+  line-height: 1;
+}
+
 
 @media (max-width: 990px) {
   #filterBox {
@@ -135,6 +179,22 @@ input {
     float: none;
     margin: auto;
   }
+  h4 {
+      color: #598CF8;
+      font-size: 20px;
+      text-align: center;
+      text-shadow: 0px 0px 0px black;
+      font-weight: bold;
+      line-height: 1.5;
+  }
+  .entryInfo {
+    width: 80%;
+    display: inline-block;
+    font-size: 15px
+  }
+  .entryPDisplay {
+    line-height: 1.5;
+  }
 }
 
 @media (max-width: 770px){
@@ -145,25 +205,4 @@ input {
     height: 95vh;
     position: relative;
   }
-}
-
-h1, h2, h3, h4, h5, h6, p {
-      font-family: 'Volkhov', serif;
-}
-
-h4 {
-    color: #598CF8;
-    text-shadow: 0px 0px 0px black;
-    font-weight: bold;
-    line-height: 1.5;
-}
-h5 {
-    color: #4DFC9C;
-    text-shadow: 0px 0px 1px black;
-    font-weight: bold;
-}
-h6 {
-    color: #FFF459;
-    text-shadow: 0px 0px 1px black;
-    font-weight: bold;
 }

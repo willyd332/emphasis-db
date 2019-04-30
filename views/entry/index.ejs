@@ -7,8 +7,7 @@
 	</head>
 	<body>
 
-	<br><br><br><br>
-
+	<br><br><br><br><br><br>
 <div class="container-fluid">
 
 <div class="row">
@@ -46,7 +45,7 @@
 
 </div>
 </div>
-<div class="col-sm-11 " id="filterBox2">
+<div class="col-sm-11" id="filterBox2">
 <form action="/entries" method="get">
 
   <div class="col-md-3 filterOption">
@@ -75,15 +74,29 @@
   </div>
 </form>
 </div>
-<div class="col-md-11" id="entriesIndex">
+<div class="row">
+  <div class="col-md-1">
+
+  </div>
+  <div class="col-md-10 entryTitle">
+    <h1>ENTRY DATABASE</h1>
+  </div>
+</div>
+<br><br><br><br>
+<div class="col-md-2">
+
+</div>
+<div class="col-md-10" id="entriesIndex">
       <% for (let i = 0; i < entries.length; i++) {%>
-        <div class="col-md-3 entry">
+        <div class="col-md-5 entry">
         <a href="/entries/<%=entries[i]._id%>" class="entryLink">
         <div class="col-md-12">
             <h4><%=entries[i].title%></h4>
-            <h5><%=entries[i].author%></h5>
-            <h6><%=entries[i].string.length%> Characters</h6>
-            <p class="col-md-12">
+            <div class="">
+            <div class="entryInfo"><%=entries[i].string.length%> Characters</div>
+            <div class="entryInfo"><%=entries[i].author%></div>
+            </div>
+            <p class="col-md-12 entryPDisplay">
               <%=entries[i].text[0].text%>
             </p>
         </div>
@@ -91,7 +104,24 @@
       </div>
       <%}%>
   </div>
+<br><br><br>
+<div class="container selectPage col-md-12">
+  <div class="col-md-12 pageForm">
+    <form action="/entries" method="get">
+        <% let base = pageNum - 5;%>
+        <% let top = pageNum + 5;%>
+        <% if (top > (totalEnt.length/16)){top = (totalEnt.length/16)} %>
+        <% if (base <= 0){base = 1} %>
+        <% if (pageNum > 5){%>
+        <button type="submit" name="number" value="<%=1%>">1...</button>
+        <% } %>
+        <% for (let i = base; i < top; i++){ %>
+          <button type="submit" name="number" value="<%=i%>"><%=i%></button>
+        <% } %>
 
+    </form>
+    </div>
+  </div>
 </div>
 
 
