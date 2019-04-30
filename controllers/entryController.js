@@ -107,6 +107,7 @@ router.get('/', function(req, res) {
 				} else {
 					pageNumber = 1;
 				}
+				pageNumber = parseInt(pageNumber)
 				const entriesArray = splitEntries(pageNumber, foundEntries);
 				res.render('entry/index.ejs', {
 					pageNum: pageNumber,
