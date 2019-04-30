@@ -7,8 +7,11 @@ const mongoose = require('mongoose');
 
 router.get('/', function(req, res)
 {
-	console.log("GET /home");
+	if (req.session.username){
 	res.render('home/index.ejs');
+} else {
+	res.render('home/login.ejs');
+}
 });
 
 module.exports = router;
