@@ -20,13 +20,15 @@
       <select name="contentType">
         <option value="<%=content%>"><%=content%></option>
         <option value="news">News</option>
+        <option value="opinion">Opinion</option>
         <option value="fiction">Fiction</option>
-        <option value="non-fiction">Non-Fiction</option>
-        <option value="technical">Technical</option>
         <option value="marketing">Marketing</option>
         <option value="business">Business</option>
-        <option value="entertainment">Entertainment</option>
-        <option value="studentEssay">Student Essay</option>
+        <option value="legal">Legal</option>
+        <option value="technical">Technical</option>
+        <option value="academic">Academic</option>
+        <option value="oratory">Oratory</option>
+        <option value="other">Other</option>
         <option value="ALL">ALL</option>
       </select>
     </div>
@@ -87,6 +89,7 @@
 
 </div>
 <div class="col-md-10" id="entriesIndex">
+  <% if (totalEnt.length > 0){%>
       <% for (let i = 0; i < entries.length; i++) {%>
         <div class="col-md-5 entry">
         <a href="/entries/<%=entries[i]._id%>" class="entryLink">
@@ -99,6 +102,16 @@
             <p class="col-md-12 entryPDisplay">
               <%=entries[i].text[0].text%>
             </p>
+        </div>
+        </a>
+      </div>
+      <%}%>
+      <%} else {%>
+        <div class="col-md-10 entry">
+        <div class="col-md-12">
+            <h4 style="font-size:30px">No Entries Of This Type</h4>
+            <a href="/entries/new"><h3 class="createPrompt">Create One?</h5></a>
+            <a href="/entries"><h3 class="createPrompt">Try Again?</h5></a>
         </div>
         </a>
       </div>

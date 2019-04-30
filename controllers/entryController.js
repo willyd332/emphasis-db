@@ -72,6 +72,7 @@ router.get('/', function(req, res) {
 					pageNumber = 1;
 				}
 				const entriesArray = splitEntries(pageNumber, foundEntries);
+				console.log(entriesArray);
 				res.render('entry/index.ejs', {
 					pageNum: pageNumber,
 					entries: entriesArray,

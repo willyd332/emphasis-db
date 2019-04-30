@@ -20,6 +20,10 @@ pre {
   font-family: 'Nanum Myeongjo', serif;
 }
 
+.createPrompt{
+  text-align: center;
+}
+
 .selectPage {
   margin-top: 50px;
   height: 100px;
