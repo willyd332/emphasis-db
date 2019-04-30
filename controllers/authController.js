@@ -12,7 +12,7 @@ router.get('/login', function(req, res)
 	}
 	else
 	{
-		res.render('auth/login.ejs');
+		res.render('auth/login.ejs')
 	}
 });
 
@@ -31,6 +31,7 @@ router.post('/login', function(req, res)
 		}
 		else if (!foundUser) //User does not exist!
 		{
+			req.session.loginAttempt = false;
 			res.redirect('/auth/login')
 		}
 		else //User DOES exist. Try the password now!!
@@ -47,10 +48,12 @@ router.post('/login', function(req, res)
 				req.session.messages.userwelcome = `Welcome, ${req.session.username}!`;
 				req.session.curuserid = foundUser._id;
 				res.redirect('/home');
+				req.session.loginAttempt = true;
 			}
 			else
 			{
 				//Passwords do NOT MATCH!
+				req.session.loginAttempt = false;
 				res.redirect('/auth/login')
 			}
 		}
@@ -83,7 +86,7 @@ router.get('/delete', function(req, res)
 {
 	if (!req.session.username)
 	{
-		res.send("You can't delete your user account because you are not logged in.");
+		res.redirect('/auth/login')
 	}
 	else
 	{
@@ -102,7 +105,7 @@ router.delete('/delete', function(req, res)
 
 	if (!req.session.username)
 	{
-		res.send("You can't delete your user account because you are not logged in.");
+			res.redirect('/auth/login')
 	}
 	else //User is logged in
 	{
@@ -119,7 +122,7 @@ router.delete('/delete', function(req, res)
 					User.findByIdAndDelete(foundUser._id, function(err, deletedUser)
 					{
 						req.session.destroy();
-						res.send("Successfully deleted your user account!");
+						res.redirect('/home')
 					});
 				}
 				else

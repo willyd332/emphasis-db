@@ -13,6 +13,7 @@
 
     <div class="container">
 		<h1>Log In</h1>
+		<h5 style="color:red; font-weight:100; text-shadow:none;"><%=session.loginmessage%></h5>
 		<form action="/auth/login" method="POST">
 			<input type="text" name="username" placeholder="Username"></input><br>
 			<input type="password" name="password" placeholder="Password"></input><br>
