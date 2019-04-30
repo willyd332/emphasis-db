@@ -82,8 +82,8 @@ router.get('/', function(req, res) {
 			pbYear = req.query.publicationYear;
 		}
 		if  (req.query.engagementScore === 'ALL'){
-			engagementScore = {'engagementScore':{$exists: true}};
-			engagement = null;
+			engagementScore = [{'engagementScore':{$exists: true}}];
+			engagement = 'ALL';
 		} else {
 			console.log(req.query.engagementScore + "THISI SI THE SCORE");
 			engagementNumber = parseInt(req.query.engagementScore)
@@ -139,7 +139,8 @@ router.get('/', function(req, res) {
 				content: 'ALL',
 				author: 'ALL',
 				publisher: 'ALL',
-				pbYear: null
+				pbYear: null,
+				engagement: 'ALL'
 			});
 		}
 	});
