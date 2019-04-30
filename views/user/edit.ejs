@@ -36,33 +36,35 @@
 		<%	}																		%>
 
 		<form action="/users/<%=user._id%>?_method=PUT" method="POST">
-			User type:
-			<select type="text" name="usertype">
-				<%	if (user.usertype == 'std') {		%>
-					<option value="std" selected>Standard</option>
-					<option value="admin">Administrator</option>
-					<option value="research">Researcher</option>
-					<option value="bot">Bot</option>
-				<%	}									%>
-				<%	if (user.usertype == 'admin') {		%>
-					<option value="std">Standard</option>
-					<option value="admin" selected>Administrator</option>
-					<option value="research">Researcher</option>
-					<option value="bot">Bot</option>
-				<%	}									%>
-				<%	if (user.usertype == 'research') {		%>
-					<option value="std">Standard</option>
-					<option value="admin">Administrator</option>
-					<option value="research" selected>Researcher</option>
-					<option value="bot">Bot</option>
-				<%	}									%>
-				<%	if (user.usertype == 'bot') {		%>
-					<option value="std">Standard</option>
-					<option value="admin">Administrator</option>
-					<option value="research">Researcher</option>
-					<option value="bot" selected>Bot</option>
-				<%	}									%>
-			</select><br>
+			<%	if (session.usertype === 'admin') {		%>
+				User type:
+				<select type="text" name="usertype">
+					<%	if (user.usertype == 'std') {		%>
+						<option value="std" selected>Standard</option>
+						<option value="admin">Administrator</option>
+						<option value="research">Researcher</option>
+						<option value="bot">Bot</option>
+					<%	}									%>
+					<%	if (user.usertype == 'admin') {		%>
+						<option value="std">Standard</option>
+						<option value="admin" selected>Administrator</option>
+						<option value="research">Researcher</option>
+						<option value="bot">Bot</option>
+					<%	}									%>
+					<%	if (user.usertype == 'research') {		%>
+						<option value="std">Standard</option>
+						<option value="admin">Administrator</option>
+						<option value="research" selected>Researcher</option>
+						<option value="bot">Bot</option>
+					<%	}									%>
+					<%	if (user.usertype == 'bot') {		%>
+						<option value="std">Standard</option>
+						<option value="admin">Administrator</option>
+						<option value="research">Researcher</option>
+						<option value="bot" selected>Bot</option>
+					<%	}									%>
+				</select><br>
+			<%	}										%>
 			Your username (unique, non-case-sensitive, should be all lowercase):<br>
 			<input type="text" name="username" value="<%=user.username%>"></input><br>
 			Your email address (must be a valid email address):<br>
