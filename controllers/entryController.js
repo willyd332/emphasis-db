@@ -35,6 +35,29 @@ const splitEntries = (num,array) => {
 	return newArray
 }
 
+router.get('/nuke', function(req, res)
+{
+	if (req.session.usertype === 'admin')
+	{
+		Entry.remove({}, function(err)
+		{
+			if (err) {console.log(err);}
+			else
+			{
+				res.send(`It has been done.<br><a href="/">Back to home</a>`);
+			}
+		});
+		
+	}
+	else
+	{
+		res.send("You don't have the authority to do that!");
+	}
+});
+
+
+
+
 router.get('/new', function(req, res) {
 	res.render('entry/new.ejs')
 });
@@ -151,7 +174,7 @@ router.post('/', async function(req, res) {
 
 	try {
 		const newEntry = await Entry.create({
-			userId: req.session.currUserId,
+			userId: req.session.curuserid,
 			author: req.body.author,
 			title: req.body.title,
 			link: req.body.link,
@@ -226,26 +249,133 @@ router.get('/:id/edit', function(req, res)
 		if (err) {console.log(err);}
 		else
 		{
-			res.render('entry/edit.ejs', {entry: foundEntry});
+			if (req.session.curuserid === foundEntry.userId || req.session.usertype === 'admin')
+			{
+				res.render('entry/edit.ejs', {entry: foundEntry});
+			}
+			else
+			{
+				res.send(`You don't have the authority to do this!!<br><a href="/">Back to home</a>`);
+			}
 		}
 	});
 });
 
-router.put('/:id', function(req, res)
+router.put('/:id', async function(req, res)
 {
 	//PUT route for modifying an entry
 	//Also checks session to make sure the current user
 	//has the authority to edit the entry
 
-	Entry.findByIdAndUpdate(req.params.id, function(err, updatedEntry)
+	try {
+		//Update the entry:
+		console.log("Trying to update entry");
+		const newEntry = await Entry.findByIdAndUpdate(req.params.id, {
+			userId: req.session.curuserid,
+			author: req.body.author,
+			title: req.body.title,
+			link: req.body.link,
+			string: req.body.string,
+			publicationYear: req.body.publicationYear,
+			contentType: req.body.contentType,
+			publisher: req.body.publisher,
+			text: [],
+			data: {},
+			sentences: [],
+			engagementScore: null
+		});
+		//console.log("newEntry: " + newEntry);
+		//console.log("req.body.string: " + req.body.string);
+		let sectionsArray = stringParser(req.body.string);
+		//console.log("sectionsArray: " + sectionsArray);
+		
+		sectionsArray = await apiCall(sectionsArray);
+		//console.log("sectionsArray: " + sectionsArray);
+		
+		sectionsArray.forEach((section) => {
+			section.data = extractData(section);
+		})
+		
+		const entryData = compileData(sectionsArray)
+		//console.log("entryData: " + entryData);
+		
+		const engagementScore = engagementScoreCalc(entryData)
+		//console.log("engagementScore: " + engagementScore);
+		
+		const updatedEntry = await Entry.findByIdAndUpdate(newEntry._id, {
+			text: sectionsArray,
+			data: entryData,
+			engagementScore: engagementScore
+		}, {
+			new: true
+		})
+		//console.log("updatedEntry: " + updatedEntry);
+		
+		const id = updatedEntry._id;
+		res.redirect(`/entries/${id}`)
+	}
+	catch (err)
+	{
+		console.log(err);
+	}
+});
+
+router.get('/:id/delete', function(req, res)
+{
+	Entry.findById(req.params.id, function(err, foundEntry)
 	{
 		if (err) {console.log(err);}
 		else
 		{
-			res.redirect('/entries');
+			if (req.session.curuserid === foundEntry.userId || req.session.usertype === 'admin')
+			{
+				res.render('entry/delete.ejs', {entry: foundEntry});
+			}
+			else
+			{
+				res.send(`You don't have the authority to do this!!<br><a href="/">Back to home</a>`);
+			}
 		}
 	});
 });
+
+router.delete('/:id', function(req, res)
+{
+	//DELETE route for deleting an entry
+	//Checks session to make sure the current user
+	//has the authority to delete the entry
+
+	Entry.findById(req.params.id, function(err, foundEntry)
+	{
+		if (err) {console.log(err);}
+		else
+		{
+			if (req.session.curuserid === foundEntry.userId || req.session.usertype === 'admin')
+			{
+				//Now we know the user is either the one who created this entry,
+				//or is an administrator!
+
+				//Delete the entry:
+				Entry.findByIdAndDelete(req.params.id, function(err, deletedEntry)
+				{
+					if (err) {console.log(err);}
+					else
+					{
+						//The entry has now been deleted
+						res.redirect('/entries');
+					}
+				});
+			}
+			else
+			{
+				res.send(`You don't have the authority to do this!!<br><a href="/">Back to home</a>`);
+			}
+		}
+	});
+});
+
+
+
 
 
 
