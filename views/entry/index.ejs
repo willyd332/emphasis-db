@@ -48,7 +48,7 @@
     <div class="filterOption">
     <h4>Engagement Score</h4>
     <select name="engagementScore" value="<%=engagement%>">
-      <% let engagTen = (parseInt(engagement) + 10) %>
+      <%let engagTen = (parseInt(engagement) + 10) %>
       <option value="<%=engagement%>"><%=engagement%>-<%=engagTen%></option>
       <option value="ALL">ALL</option>
       <option value="0">0-10</option>
@@ -110,7 +110,8 @@
     <div class="filterOption">
     <h5>Engagement</h5>
     <select name="engagementScore" value="<%=engagement%>">
-      <option value="<%=engagement%>"><%=engagement%></option>
+      <% engagTen = (parseInt(engagement) + 10) %>
+      <option value="<%=engagement%>"><%=engagement%>-<%=engagTen%></option>
       <option value="ALL">ALL</option>
       <option value="0">0-10</option>
       <option value="10">10-20</option>
