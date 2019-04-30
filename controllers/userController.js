@@ -32,7 +32,7 @@ router.get('/new', function(req, res)
 
 router.post('/', function(req, res) //POST route to create a new user!!
 {
-	
+
 	if (req.body.password !== req.body.password2)
 	{
 		//Uh oh, the passwords don't match!! We gotta get out of here...
@@ -40,7 +40,7 @@ router.post('/', function(req, res) //POST route to create a new user!!
 	}
 	else
 	{
-		
+
 		const password = req.body.password;
 		const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 

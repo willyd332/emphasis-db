@@ -28,7 +28,9 @@ const splitEntries = (num,array) => {
 	const number = (num * 16);
 	const newArray = [];
 	for (let i = (number - 16); i < number; i++){
+		if (array[i]){
 		newArray.push(array[i])
+	}
 	}
 	return newArray
 }
