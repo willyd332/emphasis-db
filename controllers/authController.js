@@ -6,12 +6,9 @@ const User = require('../models/userSchema');
 
 router.get('/login', function(req, res)
 {
-	console.log(`GET /login`);
-
 	if (req.session.username)
 	{
-		console.log("No login page sent because client already logged in!");
-		res.send("You are already logged in!");
+		res.redirect('/home')
 	}
 	else
 	{
@@ -34,8 +31,7 @@ router.post('/login', function(req, res)
 		}
 		else if (!foundUser) //User does not exist!
 		{
-			console.log(`${req.body.username} does not exist`);
-			res.send(`${req.body.username} does not exist! Try registering as a new user.`);			
+			res.redirect('/auth/login')
 		}
 		else //User DOES exist. Try the password now!!
 		{
@@ -50,26 +46,16 @@ router.post('/login', function(req, res)
 				console.log(`${req.body.username} login attempt: passwords match`);
 				req.session.messages.userwelcome = `Welcome, ${req.session.username}!`;
 				req.session.curuserid = foundUser._id;
-				res.redirect('/auth/login/success');
+				res.redirect('/home');
 			}
 			else
 			{
 				//Passwords do NOT MATCH!
-				console.log(`${req.body.username} login attempt: invalid password`);
-				res.send(`${req.body.username}, your user exists, but you entered an incorrect password!`);
+				res.redirect('/auth/login')
 			}
 		}
 	});
 });
-
-router.get('/login/success', function(req, res)
-{
-	console.log(`GET /login/success`);
-	res.send(`Hello ${req.session.username}, you are now logged in!<br><a href="/">Back to home</a>`);
-	console.log(`${req.session.username} is now logged in`);
-});
-
-
 
 
 
@@ -77,7 +63,7 @@ router.get('/logout', function(req, res)
 {
 	if (!req.session.username)
 	{
-		res.send("You can't log out because you aren't even logged in!");
+		res.redirect('/home')
 	}
 	else
 	{
@@ -89,7 +75,7 @@ router.get('/logout', function(req, res)
 		req.session.curuserid = null;
 		req.session.destroy();
 		console.log(`${tempusername} is now logged out`)
-		res.send(`${tempusername}, you are now logged out!<br><a href="/">Back to home</a>`);
+		res.redirect('/home')
 	}
 });
 
