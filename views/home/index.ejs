@@ -15,12 +15,14 @@
 			<%	if (session.usertype == 'bot') {	%>
 				<h4><font color=red><i>WARNING: You are logged in to a BOT ACCOUNT. Don't make any manual entries here unless you know what you are doing!</i></font></h4>
 			<%	}									%>
-			
+
 			<%	if (!session.logged) {				%>
 					<h2 class="welcome">Welcome to Emphasis-DB</h2>
+					<img style="width:200px;height:200:px;border-radius:15px" src="/images/DBLogo.png">
 			<%	}									%>
 			<%	if (session.logged) {								%>
 					<h2 class="welcome">Welcome to Emphasis-DB, <%=session.username%></h2>
+					<img style="width:200px;height:200:px;border-radius:15px" src="/images/DBLogo.png">
 			<%	}									%>
 
 			<%	if (!session.logged) {				%>
@@ -41,6 +43,5 @@
 
 		</div>
 	</div>
-
 </body>
 </html>
