@@ -81,7 +81,7 @@ router.get('/', function(req, res) {
 			publicationYear = req.query.publicationYear;
 			pbYear = req.query.publicationYear;
 		}
-		if  (req.query.engagementScore === 'ALL'){
+		if  (req.query.engagementScore === 'ALL' || !req.query.engagementScore){
 			engagementScore = [{'engagementScore':{$exists: true}}];
 			engagement = 'ALL';
 		} else {
