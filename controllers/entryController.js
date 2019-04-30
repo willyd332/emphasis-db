@@ -35,28 +35,6 @@ const splitEntries = (num,array) => {
 	return newArray
 }
 
-router.get('/nuke', function(req, res)
-{
-	if (req.session.usertype === 'admin')
-	{
-		Entry.remove({}, function(err)
-		{
-			if (err) {console.log(err);}
-			else
-			{
-				res.send(`It has been done.<br><a href="/">Back to home</a>`);
-			}
-		});
-		
-	}
-	else
-	{
-		res.send("You don't have the authority to do that!");
-	}
-});
-
-
-
 
 router.get('/new', function(req, res) {
 	res.render('entry/new.ejs')
