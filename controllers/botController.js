@@ -43,7 +43,7 @@ const getYear = (string) => {
 
 async function getNewsApi ()
 {
-	
+
 	try {
 		const response = await axios.get('https://newsapi.org/v2/top-headlines?country=us&apiKey=b6ae8688af7b4d5aae22e0dc8c4fa6f3')
 
@@ -53,7 +53,7 @@ async function getNewsApi ()
 
 		for (let i = 0; i < topHeadlines.length; i++){
 
-			if (topHeadlines[i].source.name !== "Newsweek") { //(BLACKLIST)
+			if (topHeadlines[i].source.name !== "Newsweek" || topHeadlines[i].source.name !== "CNN") { //(BLACKLIST)
 
 				let result = await Article(topHeadlines[i].url)
 				let publicationYear = getYear(topHeadlines[i].publishedAt)
@@ -62,7 +62,7 @@ async function getNewsApi ()
 				//Find the bot user:
 
 				const botUser = await User.findOne({username: "bot-newsapi"});
-				
+
 				if (!botUser)
 				{
 					//Uh-oh, the bot user does not exist!
