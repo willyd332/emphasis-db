@@ -19,11 +19,11 @@ router.get('/', function(req, res)
 
 router.get('/new', function(req, res)
 {
-	if (req.session.username)
+	if (req.session.username && req.session.usertype !== 'admin')
 	{
 		res.send("You must log off before trying to create a new user!");
 	}
-	else
+	else //if logged out, or an administrator user!
 	{
 		console.log("GET /users/new");
 		res.render('user/new.ejs');
@@ -45,6 +45,8 @@ router.post('/', function(req, res) //POST route to create a new user!!
 		const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
 		const lcusername = req.body.username.toLowerCase(); //make sure the username is all lower case!!
+
+		if (req.body.usertype == null) {req.body.usertype == 'std';}
 
 		const userDbEntry =
 		{
