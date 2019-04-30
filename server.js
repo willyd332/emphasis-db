@@ -21,7 +21,7 @@ app.use(session(
 	secret: "avmjlajurialajfrlirjalifjsadligjliajalerjalkejfidsjvlzkcxjvlaisjdifjsaf",
 	resave: false, //only save if there has been a change
 	saveUninitialized: false, //only save if we have mutated the session - this is what should be done for logins
-	logged: false
+	logged: false,
 }));
 
 
@@ -32,6 +32,11 @@ app.use(session(
 //kept up to date!
 app.use(function(req, res, next)
 {
+	if (req.session.loginAttempt){
+		req.session.loginmessage = null
+	} else {
+		req.session.loginmessage = "Incorrect Username or Password"
+	}
 	if (!req.session.logged)
 	{
 		req.session.messages =
