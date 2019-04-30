@@ -12,6 +12,10 @@ const compileData = require('../js/compileData')
 const sentenceArrayMaker = require('../js/sentences')
 const engagementScoreCalc = require('../js/engagementScoreCalc')
 const stringSanitizer = require('../js/stringSanitizer');
+
+
+const CronJob = require('cron').CronJob;
+
 const url = 'https://emphasis.ai/api/analysis_1/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -52,6 +56,12 @@ async function getNewsApi ()
 		const arrayCreated = [];
 
 		for (let i = 0; i < topHeadlines.length; i++){
+
+			if (Entry.find({title: topHeadlines[i].title, author: topHeadlines[i].author}))
+			{
+				console.log("bot-newsapi: duplicate skipped");
+				continue; //SKIP DUPLICATES!!
+			}
 
 			if (topHeadlines[i].source.name !== "Newsweek" && topHeadlines[i].source.name !== "CNN") { //(BLACKLIST)
 
@@ -144,13 +154,26 @@ async function getNewsApi ()
 
 router.get('/newsapi', function(req, res)
 {
-	console.log('GET bot/newsapi');
-	res.send(getNewsApi());
+	//console.log('GET bot/newsapi');
+	//res.send(getNewsApi());
+	res.send("This is temporarily disabled");
 });
 
 
 
 
+
+
+
+//CRON JOBS FOR THE BOTS!!!!
+
+
+
+
+const job = new CronJob('* * */1 * * *', function() {
+  console.log("CRON: getNewsApi");
+  getNewsApi();
+}, null, true, 'America/Denver');
 
 
 
