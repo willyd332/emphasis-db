@@ -15,21 +15,10 @@
 			<%	if (session.usertype == 'bot') {	%>
 				<h4><font color=red><i>WARNING: You are logged in to a BOT ACCOUNT. Don't make any manual entries here unless you know what you are doing!</i></font></h4>
 			<%	}									%>
-
-			<%	if (!session.logged) {				%>
-					<h2 class="welcome">Welcome to Emphasis-DB</h2>
-					<img style="width:200px;height:200:px;border-radius:15px" src="/images/DBLogo.png">
-			<%	}									%>
 			<%	if (session.logged) {								%>
 					<h2 class="welcome">Welcome to Emphasis-DB, <%=session.username%></h2>
 					<img style="width:200px;height:200:px;border-radius:15px" src="/images/DBLogo.png">
 			<%	}									%>
-
-			<%	if (!session.logged) {				%>
-				<a href="/users/new">Register</a><br>
-				<a href="/auth/login">Log In</a><br>
-			<%	}									%>
-
 			<%	if (session.usertype === 'admin') {		%>
 					<hr>
 					<h3>Administrator control panel:</h3>
@@ -38,10 +27,69 @@
 					<a href="/users/new">Create a new user</a><br>
 					<a href="/bots/index">Bot Index</a><br>
 			<%	}										%>
+			<p>
+				<h3 style="text-indent:50px;line-height:1.4">Emphasis DB is a database of texts that have been analyzed using our experimental text editor, Emphasis AI. Based on the latest neuroscience, Emphasis AI analyzes language and identifies natural patterns of emphasis. Log in to analyze your own writing and receive an engagement score.
+				</h3>
+				<h3 style="text-indent:50px;line-height:1.4">
+				Emphasis creates this analysis by assigning each sentence a color – yellow, blue or green – based on the number of signs the sentence contains.
+				</h3>
+				<br><br>
+<div class="row">
 
-			<% include ../partials/jsLinks.ejs %>
+		<div class="col-sm-2">
+			<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Signs" aria-expanded="false" aria-controls="Signs">
+			  	<h5 class="col-sm-2">ABOUT SIGNS</h5>
+			  </button>
+			</p>
+		</div>
+
+
+		<div class="col-sm-2">
+				<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Yellows" aria-expanded="false" aria-controls="Yellows Signs">
+						<h5 class="col-sm-2">ABOUT YELLOW</h5>
+					</button>
+				</p>
+		</div>
+<br><br><br><br>
+		<div class="collapse" id="Signs">
+					<div class="card card-body">
+						<h4>How to Spot a Sign</h4>
+				<p style="font-size:14px;text-indent:50px">Before it can determine the type of emphasis a sentence will produce, Emphasis AI has to identify the number of signs the sentence contains.
+				<br>
+				Put simply, a sign is a unit of meaning. From a musical note to a facial expression, anything that means something to someone can be a sign.
+				<br>
+				In language, there are many categories of signs. Emphasis AI currently analyzes one category, but future versions will analyze all of them, bringing even more power.
+				</p>
+				<p style="font-size:14px;text-indent:50px">
+				This category contains nouns, pronouns, and verbs. It is where the majority of emphasis in a sentence is produced.
+				<br>
+				But identifying these signs isn’t always as easy as counting the nouns, pronouns, and verbs in a sentence. Sometimes there are complications.
+				</p>
+
+				<h4>The Complications</h4>
+				<p style="font-size:14px;text-indent:50px">
+				When several nouns refer to a single thing, they form a single sign. A compound noun like "grocery store" or a proper noun like "Toni Morrison" counts as one sign.
+				When a pronoun appears in the same sentence as the noun to which it refers, it does not count as a sign. (According to this rule, in the preceding sentence, none of the "its" form a sign.)
+				</p>
+				<p style="font-size:14px;text-indent:50px">
+				Verbs can be tricky. As a general rule, auxiliary verbs do not count as signs. Neither do verb complements unless they are separated from the main verb by a noun, pronoun, or adjective.
+				Oh, and when a verb is followed by one or more infinitives, they all become a single sign.
+				The Proof is in the Cybernetic Pudding
+				</p>
+				<p style="font-size:14px;text-indent:50px">
+				Here's a sample sentence from Phillip K. Dick's Do Androids Dream of Electric Sheep? All of the signs are counted in bold.
+				<br><br>
+				"By then, naturally, he himself would be dead, another interesting event to anticipate as he stood here in his stricken living room, alone with the lungless, all-penetrating, masterful world-silence."
+				<br><br>
+				That’s it for the rules of sign identification! As you can see, they are complex enough to be the subject of a test, but short enough to fit on a cheat sheet.
+				</p>
+			</div>
+		</div>
 
 		</div>
 	</div>
+</div>
+
+			<% include ../partials/jsLinks.ejs %>
 </body>
 </html>

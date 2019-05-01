@@ -1,0 +1,72 @@
+.topBanner {
+  width: 100vw;
+  background-color: white;
+  border-bottom: 2px solid black;
+  height: 10vh;
+}
+.bottomBanner {
+  width: 100vw;
+  background-color: white;
+  border-top: 1px solid black;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+}
+
+.mainlogo {
+  margin-top: 5px;
+  width:78px;
+  height:78px;
+  position:absolute;
+  border-radius:15px;
+  margin-left: 12%;
+}
+
+.logInputs {
+  font-family: 'Heebo', sans-serif;
+  /* border-style: groove; */
+  /* border-color: #CCFFE1; */
+  margin-bottom: 10px;
+}
+
+.loginTextBox {
+  border-radius: 5px;
+  margin: 2px;
+  width: 98%;
+}
+
+
+.mainTitleHome{
+  text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  color: #598CF8;
+  text-shadow: 1px 1px black;
+}
+
+.loginSubmit {
+  font-size: 18px;
+  border-radius: 3px;
+  background-color: #CCFFE1;
+  color: #598CF8;
+  text-shadow: 0px 1px  grey;
+  font-weight: 800;
+  box-shadow: 0px 2px 1px 0px black;
+}
+
+.loginBody {
+  background-color: #CDCDCD;
+}
+
+.aboutHome {
+    display: inline-block;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 1.8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    border-style: groove;
+    border-color: #CCFFE1;
+}
