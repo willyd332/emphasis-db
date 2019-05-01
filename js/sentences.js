@@ -33,7 +33,7 @@ const sentenceArrayMaker = (array) => {
           sentence.text += paragraph.text[i]
         }
         sentence.text += ' ';
-        console.log(sentence.text);
+        //console.log(sentence.text);
         sentenceArray.push(sentence);
 
       })

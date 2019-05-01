@@ -1,32 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <% include ../partials/cssLinks.ejs %>
-	</head>
-	<body>
+<html>
+<head>
+	<title>Bot Index</title>
+	<% include ../partials/cssLinks.ejs %>
+</head>
+<body>
+	
+	<% include ../partials/navbar.ejs %>
 
 	<br><br><br><br>
 
-<div class="container" class="col-md-6">
-      <% for (let i = 0; i < entries.length; i++) {%>
 
-        <a href="/entries/<%=entries[i]._id%>">
-        <div class="col-md-4">
-            <div class="row">
-            <h4><%=entries[i].title%></h4>
-            <h5><%=entries[i].author%></h5>
-            <h6><%=entries[i].string.length%> Characters</h6>
-            <p class="col-md-12">
-              <%=entries[i].text[0].text%>
-            </p>
-            </div>
-        </div>
-        </a>
-      <%}%>
-  </div>
+	<div class="container">
+		<h1>Bot Index</h1>
 
-    <% include ../partials/navbar.ejs %>
-  </body>
+		<h3><font color=red>NOTE: You may need to refresh the page for the statuses to show up correctly.</font></h3>
+
+		<hr>
+		----Begin Bot Index----
+		<%  for (let i = 0; i < users.length; i++) {  %>
+				<hr>
+				<h3><a href="/users/<%=users[i]._id%>"><%=users[i].username%></a></h3><br>
+		<%  if ((session.usertype === 'admin' && users[i].usertype != 'admin') || session.username === users[i].username) {     %>
+				<form action="/users/<%=users[i]._id%>/edit" method="GET">
+					<button type="submit">Edit this user's account settings</button>
+				</form><br>
+				<form action="/bot/<%=users[i].username%>" method="GET">
+					<button type="submit">Manually activate bot</button>
+				</form><br>
+				<form action="/bot/<%=users[i].username%>/start" method="GET">
+					<button type="submit">Start bot</button>
+				</form>
+				<form action="/bot/<%=users[i].username%>/stop" method="GET">
+					<button type="submit">Stop bot</button>
+				</form>
+				<h4>Current Bot Status: <%=botstatus[i]%></h4>
+				<hr>
+				
+		<%  		}                     %>
+				<br>
+		<%  } %>
+		----End Bot Index----
+
+		<hr>
+
+		<a href="/users/new">Create a new user account</a><br>
+		<a href="/">Back to home</a>
+	</div>
+
+	<% include ../partials/jsLinks.ejs %>
+
+
+</body>
 </html>

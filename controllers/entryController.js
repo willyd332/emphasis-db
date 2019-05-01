@@ -204,14 +204,23 @@ router.get('/:id', function(req, res)
 		if (err) {console.log(err);}
 		else
 		{
-			const text = sentenceArrayMaker(foundEntry.text)
-			res.render('entry/show.ejs', {
-				entry: foundEntry,
-				text: text
+			User.findById(foundEntry.userId, function(err, foundUser)
+			{
+				if (err) {console.log(err);}
+				else
+				{
+					console.log(`GET /entries/${req.params.id}`);
+					const text = sentenceArrayMaker(foundEntry.text)
+					res.render('entry/show.ejs', {
+						entry: foundEntry,
+						text: text,
+						username: foundUser.username
+					});//end of res.render
+				}
 			});
+			
 		}
 	});
-
 });
 
 router.get('/:id/edit', function(req, res)
