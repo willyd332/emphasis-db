@@ -2,27 +2,80 @@
 <html>
 <head>
 	<title>Log In</title>
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<% include ../partials/cssLinks.ejs %>
+	<link rel="stylesheet" type="" href="/css/login.css">
 </head>
-<body>
-
-    <% include ../partials/navbar.ejs %>
-
+<body class="loginBody">
+<% include ../partials/navbar.ejs %>
     <br><br><br><br>
+		<img class="mainlogo" src="/images/DBLogo.png">
+		<div class="row">
+			<div class="col-sm-2">
 
-    <div class="container">
+			</div>
+			<h1 class="mainTitleHome col-sm-4">EMPHASIS DB</h1>
+		</div>
+		<div class="row">
+		<div class="col-sm-8">
+			<div class="col-sm-2">
+
+			</div>
+			<div class="col-md-8 container aboutHome">
+				<p>
+					Emphasis DB is a database of texts that have been analyzed using our experimental text editor,
+					Emphasis AI.
+					Based on the latest neuroscience, Emphasis AI analyzes language and identifies natural
+					patterns of emphasis.
+				</p>
+				<br>
+				<p>
+					Log in to analyze your own writing and receive an engagement score.
+				</p>
+				<br> <h5 style="text-align:center">Example Analysis</h5>
+				<p style="text-indent:50px">
+					<pre style="text-indent:30px" class="homePre">
+					<span style="font-weight:bold" class="MLKIntro">Martin Luther King | I Have A Dream | Engagement Score: 76</span>
+					<span class="yellow" style="background-color: rgb(255, 244, 89);">But we refuse to believe that the bank of justice is bankrupt. </span><span class="green" style="background-color: rgb(77, 252, 156);">We refuse to believe that there are insufficient funds in the great vaults of opportunity of this nation. </span><span class="lightBlue" style="background-color: rgb(89, 241, 255);">So we have come to cash this check- a check that will give us </span><span class="darkBlue" style="background-color: rgb(89, 140, 248);">upon demand the riches of freedom and the security of justice.</span>
+					</pre>
+				</p>
+			</div>
+		</div>
+    <div class="col-md-3 logInputs">
 		<h1>Log In</h1>
 		<h5 style="color:red; font-weight:100; text-shadow:none;"><%=session.loginmessage%></h5>
 		<form action="/auth/login" method="POST">
-			<input type="text" name="username" placeholder="Username"></input><br>
-			<input type="password" name="password" placeholder="Password"></input><br>
-			<button type="submit">Submit</button><br>
+			<input class="loginTextBox" type="text" name="username" placeholder="Username"></input><br>
+			<input class="loginTextBox" type="password" name="password" placeholder="Password"></input>
+			<br><br>
+			<button class="loginSubmit" type="submit">Log In</button><br>
 		</form>
-
-		<a href="/">Back to home</a>
 	</div>
+	<div class="col-sm-3 logInputs">
+		<h1>Create Acount</h1>
 
+		<form action="/users" method="POST">
+			<%	if (session.usertype === 'admin') {		%>
+				User type:
+				<select type="text" name="usertype">
+					<option value="std">Standard</option>
+					<option value="admin">Administrator</option>
+					<option value="research">Researcher</option>
+					<option value="bot">Bot</option>
+				</select><br>
+			<%	}										%>
+			<input style="width:49%;" class="loginTextBox" type="text" name="username" placeholder="Username"></input><input style="width:48%;margin-left:1px;"  class="loginTextBox" type="text" name="displayname" placeholder="Display Name"></input><br>
+			<input class="loginTextBox" type="email" name="email" placeholder="Email"></input><br>
+			<input class="loginTextBox" type="password" name="password" placeholder="Password"></input><br>
+			<input class="loginTextBox" type="password" name="password2" placeholder="Confirm Password"></input>
+			<br><br>
+			<button class="loginSubmit" type="submit">Sign Up</button><br>
+		</form>
+	</div>
+</div>
+</div>
+<div class="row">
+
+</div>
     <% include ../partials/jsLinks.ejs %>
 
 </body>
