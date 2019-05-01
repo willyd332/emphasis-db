@@ -266,13 +266,13 @@ router.get('/bot-newsapi/stop', function(req, res)
 //CRON JOBS FOR THE BOTS!!!!
 
 
-
-//NewsAPI bot runs every 15 minutes
-const jobNewsApi = new CronJob('* */15 * * * *', function() {
-  console.log("CRON: getNewsApi");
-  getNewsApi();
-}, null, true, 'America/Denver');
-//jobNewsApi.start();
+//THIS BOT TEMPORARILY DISABLED! RUN IT MANUALLY.
+// //NewsAPI bot runs every 15 minutes
+// const jobNewsApi = new CronJob('* */15 * * * *', function() {
+//   console.log("CRON: getNewsApi");
+//   getNewsApi();
+// }, null, true, 'America/Denver');
+// //jobNewsApi.start();
 
 
 
