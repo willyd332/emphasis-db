@@ -16,28 +16,36 @@
 		<h2>CREATE ENTRY</h2>
 
 		<form action="/entries" method="post">
-			Author: 			<input type="text" name="author"><br/>
-			Title: 				<input type="text" name="title"><br/>
-			Link: 				<input type="text" name="link"><br><br>
+			Author:<br/>
+			<input class="entryInput" type="text" name="author"><br/><br/>
+			Title:<br/>
+			<input class="entryInput" type="text" name="title"><br/><br/>
+			Link:<br/>
+			<input class="entryInput" type="text" name="link"><br><br>
 			<!--String-->
-			 					<textarea rows=25 cols=100 name="string">Put your text here!</textarea><br><br>
-			Publication Year: 	<input type="number" name="publicationYear"><br>
-			Content Type: 		<br><select type="text" name="contentType">
-									<option value="news">News</option>
-									<option value="fiction">Fiction</option>
-									<option value="non-fiction">Non-Fiction</option>
-									<option value="technical">Technical</option>
-									<option value="marketing">Marketing</option>
-									<option value="business">Business</option>
-									<option value="entertainment">Entertainment</option>
-									<option value="studentEssay">Student Essay</option>
-								</select><br/>
-			Publisher: 			<input type="text" name="publisher"><br/>
-			
+			 					<textarea class="entryInput" rows=25 cols=100 name="string">Put your text here!</textarea><br><br>
+			Publication Year:<br/>
+			<input class="entryInput" type="number" name="publicationYear"><br><br/>
+			Content Type:
+			<br><select type="text" name="contentType">
+						<option value="news">News</option>
+						<option value="opinion">Opinion</option>
+						<option value="fiction">Fiction</option>
+						<option value="marketing">Marketing</option>
+						<option value="business">Business</option>
+						<option value="legal">Legal</option>
+						<option value="technical">Technical</option>
+						<option value="academic">Academic</option>
+						<option value="oratory">Oratory</option>
+						<option value="other">Other</option>
+					</select><br/><br/>
+			Publisher:<br/>
+			<input  class="entryInput" type="text" name="publisher"><br/>
+
 			<button type="submit">Submit Entry</button>
 		</form>
 	</div>
-	
+
 		<% include ../partials/jsLinks.ejs %>
 
 

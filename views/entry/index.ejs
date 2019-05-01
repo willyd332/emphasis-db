@@ -185,6 +185,9 @@
     <form action="/entries" method="get">
       <input style="display:none" name="contentType" value="<%=content%>">
       <input style="display:none" name="authorName" value="<%=author%>">
+      <input style="display:none" name="engagementScore" value="<%=engagement%>">
+      <input style="display:none" name="publicationYear" value="<%=pbYear%>">
+      <input style="display:none" name="publisher" value="<%=publisher%>">
         <% let base = pageNum - 2;%>
         <% let top = pageNum + 5;%>
         <% if (top > (totalEnt.length/16)){top = (totalEnt.length/16)} %>
