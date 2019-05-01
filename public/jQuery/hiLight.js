@@ -76,7 +76,7 @@ if (hover) {
   blue     = false;
   word     = false;
   $('button').css('border', ' 1px solid black')
-  $('#hoverButton').css('border', '8px solid black')
+  $('#hoverButton').css({'border':'8px groove black','border-right':'8px groove white','border-left':'8px groove white'})
 }
 }
 const allColorButton  = () => {
@@ -100,7 +100,7 @@ const allColorButton  = () => {
     blue     = false;
     word     = false;
     $('button').css('border', ' 1px solid black')
-    $('#allColorButton').css('border', '8px solid black')
+    $('#allColorButton').css({'border':'8px groove black','border-right':'8px groove white','border-left':'8px groove white'})
   }
 }
 const yellowButton    = () => {
@@ -120,7 +120,7 @@ const yellowButton    = () => {
     blue     = false;
     word     = false;
     $('button').css('border', ' 1px solid black')
-    $('#yellowButton').css('border', '8px solid black')
+    $('#yellowButton').css({'border':'8px groove black','border-right':'8px groove white','border-left':'8px groove white'})
   }
 }
 const blueButton      = () => {
@@ -142,7 +142,7 @@ const blueButton      = () => {
     yellow   = false;
     word     = false;
     $('button').css('border', ' 1px solid black')
-    $('#blueButton').css('border', '8px solid black')
+    $('#blueButton').css({'border':'8px groove black','border-right':'8px groove white','border-left':'8px groove white'})
   }
 }
 const greenButton     = () => {
@@ -163,7 +163,7 @@ const greenButton     = () => {
     yellow   = false;
     word     = false;
     $('button').css('border', ' 1px solid black')
-    $('#greenButton').css('border', '8px solid black')
+    $('#greenButton').css({'border':'8px groove black','border-right':'8px groove white','border-left':'8px groove white'})
   }
 }
 const wordButton      = () => {

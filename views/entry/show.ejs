@@ -4,46 +4,48 @@
 		<meta charset="utf-8">
 		<title></title>
 		<% include ../partials/cssLinks.ejs %>
+		<link rel="stylesheet" type="" href="/css/show.css">
 	</head>
 	<body>
 
     <% include ../partials/navbar.ejs %>
 
     <br><br><br><br>
-
+		<div class="container">
     <div class="container">
-
-		<h1>ENTRY SHOW PAGE</h1>
-		<%	if (session.curuserid === entry.userId) {	%>
-				<h2>NOTE: You created this entry</h2>
-		<%	}											%>
-		<h2>Created by user: <%=username%></h2>
-		<h2>Title: <%=entry.title%></h2>
-		<h2>Author: <%=entry.author%></h2>
-		<h2><a href="<%=entry.link%>">LINK TO ORIGINAL</a></h2>
-		<h2><a href="/entries/<%=entry._id%>/compare">Find similar entries</a></h2>
+		<h2 class="showUser">Created By: <%=username%><%	if (session.curuserid === entry.userId) {	%> (your entry) <%	}	%></h2>
+		<a href="<%=entry.link%>"><h1 class="showTitle"><%=entry.title%></h1></a>
+		<h2 class="showAuthor"><%=entry.author%></h2>
+		<h2 class="showInfo"><%=entry.publisher%> | <%=entry.publicationYear%> | <%=entry.contentType%></h2>
+		</div>
+		<div class="container col-md-12 engage-box">
+			<div class="row">
+			<div class="col-md-4">
+				<br>
+				<p class="showScore"><%=entry.engagementScore%></p>
+				<p class="showEngage">ENGAGEMENT SCORE</p>
+			</div>
+			<div class="col-md-8 color-list ">
+				<br><br>
+					<p class="color-data dYellow"><%=entry.data.yellow.percentage%>%</p><p class="color-data dBlue"><%=entry.data.blue.percentage%>%</p><p class="color-data dGreen"><%=entry.data.green.percentage%>%</p><p class="color-data dLight-Green"><%=entry.data.lightGreen.percentage%>%</p><p class="color-data dFaded-Blue"><%=entry.data.fadedBlue.percentage%>%</p>
+			</div>
+		</div>
+				<h2 class="entryOptions"><a href="/entries/<%=entry._id%>/compare">FIND SIMILAR ENTRIES</a></h2>
 		<%	if (session.curuserid === entry.userId || session.usertype === 'admin') {	%>
-				<h2><a href="/entries/<%=entry._id%>/edit">EDIT THIS ENTRY</a></h2>
-				<h2><a href="/entries/<%=entry._id%>/delete">DELETE THIS ENTRY</a></h2>
-		<%	}																			%>
-
-		<h2>Publication Year: <%=entry.publicationYear%></h2>
-		<h2>Content Type: <%=entry.contentType%></h2>
-		<h2>Publisher: <%=entry.publisher%></h2>
-		<ul>
-			<li>Yellow: <%=entry.data.yellow.percentage%>%</li>
-			<li>Blue: <%=entry.data.blue.percentage%>%</li>
-			<li>Green: <%=entry.data.green.percentage%>%</li>
-			<li>Light-Green: <%=entry.data.lightGreen.percentage%>%</li>
-			<li>Faded-Blue: <%=entry.data.fadedBlue.percentage%>%</li>
-		</ul>
-		<h2>Engagement Score: <%=entry.engagementScore%></h2>
-		<button id="hoverButton" type="button">HOVER VIEW</button>
-		<button id="allColorButton" type="button">ALL COLOR VIEW</button>
-		<button id="yellowButton" type="button">YELLOW ONLY</button>
-		<button id="greenButton" type="button">GREEN ONLY</button>
-		<button id="blueButton" type="button">BLUE ONLY</button>
-		<h2>Text:</h2>
+				<h2 class="entryOptions"><a href="/entries/<%=entry._id%>/edit">EDIT THIS ENTRY</a></h2>
+				<h2 class="entryOptions"><a href="/entries/<%=entry._id%>/delete">DELETE THIS ENTRY</a></h2>
+		<%	} %>
+		<br>
+		</div>
+		<div class="buttonBox">
+			<div class="container">
+				<button class="dataButton hButt" id="hoverButton" type="button">HOVER VIEW</button>
+				<button class="dataButton aButt" id="allColorButton" type="button">ALL COLOR VIEW</button>
+				<button class="dataButton yButt" id="yellowButton" type="button">YELLOW ONLY</button>
+				<button class="dataButton gButt" id="greenButton" type="button">GREEN ONLY</button>
+				<button class="dataButton bButt" id="blueButton" type="button">BLUE ONLY</button>
+			</div>
+		</div>
 		<p class="text">
     <pre id="preDis">
 			<% for (let i = 0; i < text.length; i++) { %><span class="<%=text[i].color%>"><%=text[i].text%></span><% } %>

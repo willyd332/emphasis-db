@@ -1,0 +1,125 @@
+.showTitle {
+  text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  color: #598CF8;
+  text-shadow: 1px 1px black;
+}
+
+.showUser {
+  text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: black;
+}
+
+.showAuthor{
+  text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  text-shadow: 1px 1px black;
+}
+
+.showInfo {
+  text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 300;
+  font-size: 25px;
+  text-shadow: 1px 1px black;
+}
+
+.showScore {
+  text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 300;
+  font-size: 60px;
+  color: #CCFFE1;
+  text-shadow: 1px 1px black;
+}
+
+.showEngage {
+  text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  text-shadow: 1px 1px black;
+}
+
+.engage-box{
+  border-top: 2px groove black;
+  border-bottom: 2px groove black;
+  height: 100%;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+}
+
+.color-data {
+  display: inline-block;
+  font-size: 50px;
+  margin-right: 60px;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+}
+
+.dYellow{
+color: #FFF459;
+}
+.dGreen{
+color: #4DFC9C;
+}
+.dBlue{
+color: #598CF8;
+}
+.dLight-Green{
+color: #CCFFE1;
+}
+.dFaded-Blue{
+color: #D2F9FF;
+}
+
+.color-list {
+  text-align: center;
+  height: 100%;
+}
+
+.entryOptions {
+  text-align: center;
+}
+
+.buttonBox {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: inline-block;
+  text-align: center;
+}
+
+.dataButton {
+  display: inline-block;
+  margin-right: 5%;
+  height: 10vh;
+  font-family: 'Heebo', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.hButt{
+box-shadow: 0px 0px 12px black;
+}
+.aButt{
+box-shadow: 0px 0px 12px black;
+}
+.yButt{
+box-shadow: 0px 0px 12px #FFF459;
+}
+.gButt{
+box-shadow: 0px 0px 12px #4DFC9C;
+}
+.bButt{
+box-shadow: 0px 0px 12px #598CF8;
+}
+
+button:focus { outline: none; }

@@ -5,6 +5,7 @@ button {
 body {
   background-position: center;
   background-size: cover;
+  background-color: #CDCDCD;
 }
 
 .navbar {
@@ -92,20 +93,31 @@ input {
   margin-left: 5%;
 }
 
+.topFilter {
+  border-top: 3px groove black;
+  border-right: 3px groove black;
+}
+
+.bottomFilter {
+  border-bottom: 3px groove black;
+  border-left: 3px groove black;
+}
+
 .entry {
   /* float: right; */
   display: inline-block;
   padding: 10px;
-  margin: 5px;
+  margin: 10px;
   font-size: 13px;
   line-height: 2;
   background-color: #e8e8e8;
   word-break: normal;
   word-wrap: normal;
-  border: 1px solid #ccc;
+  border: 2px groove #CCFFE1;
   border-radius: 4px;
   height: 40vh;
   overflow: hidden;
+  box-shadow: 0px 5px 10px 0px black;
 }
 
 #preDis {
@@ -152,7 +164,7 @@ h4 {
 }
 
 .entryPDisplay {
-  line-height: 1;
+  line-height: 1.1;
 }
 
 
@@ -261,4 +273,12 @@ h4 {
     height: 95vh;
     position: relative;
   }
+}
+.titleDB{
+text-align: center;
+font-family: 'Heebo', sans-serif;
+font-weight: 600;
+font-size: 50px;
+color: #598CF8;
+text-shadow: 1px 1px black;
 }
