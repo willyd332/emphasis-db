@@ -21,7 +21,7 @@
 		<h2>Title: <%=entry.title%></h2>
 		<h2>Author: <%=entry.author%></h2>
 		<h2><a href="<%=entry.link%>">LINK TO ORIGINAL</a></h2>
-
+		<h2><a href="/entries/<%=entry._id%>/compare">Find similar entries</a></h2>
 		<%	if (session.curuserid === entry.userId || session.usertype === 'admin') {	%>
 				<h2><a href="/entries/<%=entry._id%>/edit">EDIT THIS ENTRY</a></h2>
 				<h2><a href="/entries/<%=entry._id%>/delete">DELETE THIS ENTRY</a></h2>

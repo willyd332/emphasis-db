@@ -36,12 +36,236 @@ const splitEntries = (num,array) => {
 }
 
 
+
+function comparePercentages(p1, p2)
+{
+	//p1 and p2 are objects containing the following:
+	//	{
+	//		y: %yellow,
+	//		g: %green,
+	//		b: %blue,
+	//		lg: %lightgreen,
+	//		fb: %fadedblue,
+	//	}
+
+	//First, compare the percentages of the various colors and
+	//determine the average deviation thereof:
+
+	let totalDev = Math.abs(p1.y-p2.y) + Math.abs(p1.g-p2.g) + Math.abs(p1.b-p2.b) + Math.abs(p1.lg-p2.lg) + Math.abs(p1.fb-p2.fb);
+	let avgDev = totalDev / 5;
+
+	//Note that the maximum possible deviation is 100
+	//To give a comparision score from 1 to 100, we have only to subtract the average deviation from 100:
+	//console.log("comparePercentages is returning " + (100-avgDev));
+	return (100 - avgDev);
+}
+
+function bubbleSortSimilarity(arr)
+{
+	//Bubble sort for the similarity function
+	//Recurses until it's done
+
+	let changed = false;
+	let temp = arr[0];
+
+	for (let i = 0; i < arr.length - 1; i++)
+	{
+		if (arr[i].similarity < arr[i + 1].similarity)
+		{
+			temp = arr[i];
+			arr[i] = arr[i + 1];
+			arr[i + 1] = temp;
+			changed = true;
+			//console.log("Bubble sort made a switch");
+		}
+	}
+	if (changed) {return bubbleSortSimilarity(arr);}
+	else {return arr;}
+}
+
+function sortBySimilarity(entriesArray, compareYellow, compareGreen, compareBlue, compareLightGreen, compareFadedBlue)
+{
+	//Sorts all the entries in entriesArray based on their similarity
+	//to the given percentages of colors
+
+	//First, get all the similarities:
+	for (let i = 0; i < entriesArray.length; i++)
+	{
+		entriesArray[i].similarity = comparePercentages(
+			{
+				y: compareYellow,
+				g: compareGreen,
+				b: compareBlue,
+				lg: compareLightGreen,
+				fb: compareFadedBlue
+			},
+			{
+				y: entriesArray[i].data.yellow.percentage,
+				g: entriesArray[i].data.green.percentage,
+				b: entriesArray[i].data.blue.percentage,
+				lg: entriesArray[i].data.lightGreen.percentage,
+				fb: entriesArray[i].data.fadedBlue.percentage
+			}
+		);
+		//console.log(`data.yellow.percentage: ${entriesArray[i].data.yellow.percentage}`);
+		//console.log(`compareYellow: ${compareYellow}`);
+		//console.log(`Similarity: ${entriesArray[i].similarity}`);
+	}
+
+	//Now sort everything:
+	return bubbleSortSimilarity(entriesArray);
+}
+
+
+
+
+
+router.get('/insights', async function(req, res)
+{
+	let categories =
+	[//====================
+		'all',
+		'news',
+		'opinion',
+		'fiction',
+		'marketing',
+		'business',
+		'legal',
+		'technical',
+		'academic',
+		'oratory',
+		'other'
+	];//===================
+
+	let insights =
+	await {
+		all:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		news:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		opinion:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		fiction:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		marketing:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		business:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		legal:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		technical:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		academic:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		oratory:
+			{
+				quantity: 0,
+				avgEng: 0
+			},
+		other:
+			{
+				quantity: 0,
+				avgEng: 0
+			}
+	};
+	await Entry.find({}, function(err, foundEntries)
+	{
+		//dump in raw data:
+		for (let i = 0; i < foundEntries.length; i++)
+		{
+			if (foundEntries[i].contentType == 'non-fiction') {foundEntries[i].contentType = 'other';}
+			//console.log(`contentType: ${foundEntries[i].contentType}`);
+			insights[foundEntries[i].contentType].quantity++;
+			insights[foundEntries[i].contentType].avgEng = insights[foundEntries[i].contentType].avgEng + foundEntries[i].engagementScore;
+		}
+		//Transform the data:
+		for (let i = 0; i < categories.length; i++)
+		{
+			insights[categories[i]].avgEng = insights[categories[i]].avgEng / insights[categories[i]].quantity;
+		}
+		console.log(insights);
+		res.render('entry/insights.ejs', {insights: insights});
+	});
+});
+
+
+router.get('/:id/compare', function(req, res)
+{
+	//id is the id of the entry we are comparing
+	//We'll display a list of the entries that are
+	//closest to it in terms of reader engagement
+	//(not just the engagement score, but the average
+	//deviation for each color as well)
+
+	Entry.findById(req.params.id, function(err, foundEntry)
+	{
+		if (err) {console.log(err);}
+		else
+		{
+			let y = foundEntry.data.yellow.percentage;
+			let g = foundEntry.data.green.percentage;
+			let b = foundEntry.data.blue.percentage;
+			let lg = foundEntry.data.lightGreen.percentage;
+			let fb = foundEntry.data.fadedBlue.percentage;
+
+			res.redirect(`/entries/?comparing=true&compareYellow=${y}&compareGreen=${g}&compareBlue=${b}&compareLightGreen=${lg}&compareFadedBlue=${fb}`);
+		}
+	});
+
+});
+
+
+
 router.get('/new', function(req, res) {
 	res.render('entry/new.ejs')
 });
 
 router.get('/', function(req, res) {
 	//Index route for ALL entries
+	
+	let comparing = false;
+	let compareYellow;
+	let compareGreen;
+	let compareBlue;
+	let compareLightGreen;
+	let compareFadedBlue;
+	if (req.query.comparing)
+	{
+		comparing = true;
+		compareYellow = req.query.compareYellow;
+		compareGreen = req.query.compareGreen;
+		compareBlue = req.query.compareBlue;
+		compareLightGreen = req.query.compareLightGreen;
+		compareFadedBlue = req.query.compareFadedBlue;
+	}
+
 	if (req.query.contentType){
 		let contentType;
 		let authorName;
@@ -86,7 +310,7 @@ router.get('/', function(req, res) {
 			engagementScore = [{'engagementScore':{$exists: true}}];
 			engagement = 'ALL';
 		} else {
-			console.log(req.query.engagementScore + "THISI SI THE SCORE");
+			console.log(req.query.engagementScore + "THIS IS THE SCORE");
 			engagementNumber = parseInt(req.query.engagementScore)
 			engagementScore = [{'engagementScore':{$gte: engagementNumber}},{'engagementScore':{$lte: engagementNumber + 10}}]
 			engagement = req.query.engagementScore;
@@ -109,7 +333,16 @@ router.get('/', function(req, res) {
 					pageNumber = 1;
 				}
 				pageNumber = parseInt(pageNumber)
-				const entriesArray = splitEntries(pageNumber, foundEntries);
+				let entriesArray = splitEntries(pageNumber, foundEntries);
+
+				//If comparing, change entriesArray to be sorted by
+				//similarity to the entry we're comparing to:
+
+				if (comparing)
+				{
+					entriesArray = sortBySimilarity(entriesArray, compareYellow, compareGreen, compareBlue, compareLightGreen, compareLightBlue, compareFadedBlue);
+				}
+
 				res.render('entry/index.ejs', {
 					pageNum: pageNumber,
 					entries: entriesArray,
@@ -118,7 +351,8 @@ router.get('/', function(req, res) {
 					author: author,
 					publisher: publisher,
 					pbYear: pbYear,
-					engagement: engagement
+					engagement: engagement,
+					comparing: comparing
 				});
 			}
 		});
@@ -133,7 +367,16 @@ router.get('/', function(req, res) {
 			} else {
 				pageNumber = 1;
 			}
-			const entriesArray = splitEntries(pageNumber, foundEntries);
+			let entriesArray = splitEntries(pageNumber, foundEntries);
+			
+			//If comparing, change entriesArray to be sorted by
+			//similarity to the entry we're comparing to:
+
+			if (comparing)
+			{
+				entriesArray = sortBySimilarity(entriesArray, compareYellow, compareGreen, compareBlue, compareLightGreen, compareFadedBlue);
+			}
+			
 			res.render('entry/index.ejs', {
 				entries: entriesArray,
 				pageNum: pageNumber,
@@ -142,7 +385,8 @@ router.get('/', function(req, res) {
 				author: 'ALL',
 				publisher: 'ALL',
 				pbYear: null,
-				engagement: 'ALL'
+				engagement: 'ALL',
+				comparing: comparing
 			});
 		}
 	});
@@ -361,6 +605,8 @@ router.delete('/:id', function(req, res)
 		}
 	});
 });
+
+
 
 
 
