@@ -57,14 +57,10 @@ async function getNewsApi ()
 
 		for (let i = 0; i < topHeadlines.length; i++){
 
-			if (Entry.find({title: topHeadlines[i].title, author: topHeadlines[i].author}))
-			{
-				console.log("bot-newsapi: duplicate skipped");
-				continue; //SKIP DUPLICATES!!
-			}
+			let testEntry = await Entry.findOne({title: topHeadlines[i].title, author: topHeadlines[i].author});
 
-			if (topHeadlines[i].source.name !== "Newsweek" && topHeadlines[i].source.name !== "CNN") { //(BLACKLIST)
-
+			
+			if (!testEntry && topHeadlines[i].source.name !== "Newsweek" && topHeadlines[i].source.name !== "CNN") { //(BLACKLIST)
 				let result = await Article(topHeadlines[i].url)
 				let publicationYear = getYear(topHeadlines[i].publishedAt)
 				let sanitizedString = stringSanitizer(result.text)
@@ -104,7 +100,7 @@ async function getNewsApi ()
 					engagementScore: null
 				});
 
-				console.log(newEntry);
+				//console.log(newEntry);
 				botUser.entries.push(newEntry);
 
 				// THE STUFF BELOW THIS LINE IS DATABASE STUFF, YOU DO NOT NEED TO TOUCH IT
@@ -127,7 +123,20 @@ async function getNewsApi ()
 				})
 
 				arrayCreated.push(updatedEntry);
+				console.log("bot-newsapi: added new entry");
 			} //end if for checking topheadlines.source.name blacklist
+			else
+			{
+				if (testEntry)
+				{
+					await console.log("bot-newsapi: duplicate skipped");
+				}
+				else
+				{
+					await console.log("bot-newsapi: BLACKLISTED");
+				}
+				continue;
+			}
 		}
 
 		//res.render('bots/index.ejs', {entries: arrayCreated});
@@ -205,6 +214,7 @@ router.get('/bot-newsapi', function(req, res)
 	else
 	{
 		console.log('GET bot/bot-newsapi');
+		getNewsApi();
 		res.send("Success");
 	}
 });
