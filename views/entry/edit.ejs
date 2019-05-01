@@ -11,7 +11,6 @@
 
 	<br><br><br><br>
 
-
 	<div class="container">
 		<h2>UPDATE ENTRY</h2>
 
@@ -23,12 +22,12 @@
 			Link: <br/>
 			<input class="entryInput" type="text" name="link" value="<%=entry.link%>"><br><br>
 			<!--String-->
-			 					<textarea class="entryInput" rows=25 cols=100 name="string"><%=entry.string%></textarea><br><br>
+      <textarea class="entryInput" rows=25 cols=100 name="string"><%=entry.string%></textarea><br><br>
 			Publication Year:<br/>
 			<input class="entryInput" type="number" name="publicationYear" value="<%=entry.publicationYear%>"><br><br/>
 			Content Type:<br/>
 			<br><select type="text" name="contentType">
-									<option <option value="<%=entry.contentType%>"><%=entry.contentType></option>
+							<option value="<%=entry.contentType%>"><%=entry.contentType%></option>
 					        <option value="news">News</option>
 					        <option value="opinion">Opinion</option>
 					        <option value="fiction">Fiction</option>

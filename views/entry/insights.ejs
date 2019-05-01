@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<% include ../partials/cssLinks.ejs %>
+</head>
+<body>
+
+	<% include ../partials/navbar.ejs %>
+
+	<br><br><br><br>
+
+	<div class="container">
+		
+		<h2>Insights</h2>
+
+		<p>
+			Some quick statistics on the Emphasis-DB Database!
+		</p><br>
+
+		<hr>
+
+		<p>
+			Categories: <br>
+			ALL:<br>
+			Quantity: <%=insights.all.quantity%><br>
+			Average engagement score: <%=insights.all.avgEng%><br>
+			<br>
+			News:<br>
+			Quantity: <%=insights.news.quantity%><br>
+			Average engagement score: <%=insights.news.avgEng%><br>
+			<br>
+			Opinion:<br>
+			Quantity: <%=insights.opinion.quantity%><br>
+			Average engagement score: <%=insights.opinion.avgEng%><br>
+			<br>
+			Fiction:<br>
+			Quantity: <%=insights.fiction.quantity%><br>
+			Average engagement score: <%=insights.fiction.avgEng%><br>
+			<br>
+			Marketing:<br>
+			Quantity: <%=insights.marketing.quantity%><br>
+			Average engagement score: <%=insights.marketing.avgEng%><br>
+			<br>
+			Business:<br>
+			Quantity: <%=insights.business.quantity%><br>
+			Average engagement score: <%=insights.business.avgEng%><br>
+			<br>
+			Legal:<br>
+			Quantity: <%=insights.legal.quantity%><br>
+			Average engagement score: <%=insights.legal.avgEng%><br>
+			<br>
+			Technical:<br>
+			Quantity: <%=insights.technical.quantity%><br>
+			Average engagement score: <%=insights.technical.avgEng%><br>
+			<br>
+			Academic:<br>
+			Quantity: <%=insights.academic.quantity%><br>
+			Average engagement score: <%=insights.academic.avgEng%><br>
+			<br>
+			Oratory:<br>
+			Quantity: <%=insights.oratory.quantity%><br>
+			Average engagement score: <%=insights.oratory.avgEng%><br>
+			<br>
+			Other:<br>
+			Quantity: <%=insights.other.quantity%><br>
+			Average engagement score: <%=insights.other.avgEng%><br>
+			<br>
+		</p>
+
+	</div>
+
+	<% include ../partials/jsLinks.ejs %>
+
+</body>
+</html>
