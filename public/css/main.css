@@ -10,15 +10,24 @@ body {
 .navbar {
   color: black;
   font-weight: bold;
-  height: 80px
+  height: 80px;
+  padding-top: 20px;
+  border-bottom-style: groove;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
 }
 
-.mainlogo {
-  width:80px;
-  height:80px;
-  position:absolute;
-  border-radius:15px;
-  margin-left: 2%;
+.homePre {
+  display: block;
+  padding: 20px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 2.3;
+  color: #333;
+  word-break: normal;
+  word-wrap: normal;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 pre {
@@ -43,7 +52,7 @@ pre {
 
 #filterBox {
   height: 90vh;
-  top: 50px;
+  top: 100px;
   position: fixed;
   overflow: hidden;
   float: right;
@@ -74,6 +83,13 @@ input {
 
 .entryTitle {
   text-align: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 600;
+  top: 200px;
+  position: absolute;
+  display: inline-block;
+  width: 800px;
+  margin-left: 5%;
 }
 
 .entry {

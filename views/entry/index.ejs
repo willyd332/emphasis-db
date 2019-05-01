@@ -10,12 +10,11 @@
     <% include ../partials/navbar.ejs %>
 
 
-	<br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br>
 <div class="container-fluid">
 
 <div class="row">
-
-  <div class="col-md-2" id="filterBox">
+  <div class="col-md-2 pull-left" id="filterBox">
   <form action="/entries" method="get">
 
     <div class="filterOption">
@@ -71,9 +70,6 @@
       <button type="submit">Filter Entries</button>
     </div>
   </form>
-</div>
-<div class="col-sm-10">
-
 </div>
 </div>
 <div class="col-sm-11" id="filterBox2">
@@ -139,14 +135,11 @@
 
   </div>
   <div class="col-md-10 entryTitle">
-    <h1>ENTRY DATABASE</h1>
+    <h1>EMPHASIS DB DATABASE</h1>
   </div>
 </div>
 <br><br><br><br>
-<div class="col-md-2">
-
-</div>
-<div class="col-md-10" id="entriesIndex">
+<div class="col-md-10 pull-right" id="entriesIndex">
   <h2>Here are entries with color percentages similar to the one you are comparing with, sorted according to how similar they are!</h2>
   <% if (totalEnt.length > 0){%>
       <% for (let i = 0; i < entries.length; i++) {%>
@@ -204,7 +197,7 @@
   </div>
 </div>
 
-<br><br><br><br>
+<br><br><br><br> <br><br><br><br><br><br><br><br>
 
 
 
