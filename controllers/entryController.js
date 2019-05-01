@@ -214,7 +214,7 @@ router.get('/:id', function(req, res)
 					res.render('entry/show.ejs', {
 						entry: foundEntry,
 						text: text,
-						username: foundUser.username
+						username: foundUser.displayname
 					});//end of res.render
 				}
 			});
