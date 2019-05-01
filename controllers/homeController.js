@@ -15,4 +15,9 @@ router.get('/', function(req, res)
 }
 });
 
+router.get('/about/:topic', (req,res)=>{
+	res.render(`info/${req.params.topic}.ejs`)
+})
+
+
 module.exports = router;

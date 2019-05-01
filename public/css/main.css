@@ -1,3 +1,5 @@
+button:focus { outline: none; }
+
 button {
   display: inline-block;
 }
@@ -8,6 +10,12 @@ body {
   background-color: #CDCDCD;
 }
 
+.General {
+  height: 50vh;
+  overflow: scroll;
+}
+
+
 .navbar {
   color: black;
   font-weight: bold;
@@ -16,6 +24,16 @@ body {
   border-bottom-style: groove;
   border-bottom-color: black;
   border-bottom-width: 1px;
+}
+
+.generalButton{
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color:inherit;
 }
 
 .homePre {

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <% include ../partials/cssLinks.ejs %>
+  </head>
+  <body>
+    <% include ../partials/navbar.ejs %>
+<div style="padding:80px" class="jumbotron">
+
+    <br><br>
+
+  <a href="/home"><h4 style="font-size:30px">HOME</h4></a>
+
+    <br><br>
+    <h3>What is Emphasis DB?</h3>
+    Emphasis DB is a database of stories, speeches, and other texts that have been analyzed using Emphasis AI. In this database, you can view public entries and also analyze your own writing.
+    <br><br>
+    Each entry in the database is given an engagement score. This engagement score is based on the number of sentences of each color the entry text contains. According to our systems, texts that contain only green, yellow, and blue sentences in equal proportion are highly engaging. The more faded blue and faded green sentences a text contains, the less engaging it will be.
+    <br><br>
+    A text with a perfect amount of sentence-level emphasis will receive an engagement score of 100. (We haven't found one of these yet.) To gain a sense of how our engagement score works, think of texts with a score of 60-70 as average, 70-80 as good, and 80-90 as excellent. If your score is 50 or below, it could probably use some editing on Emphasis AI. If your score is 90 or more, you have already mastered the fine art of sentence-level emphasis. We bow to your skill.
+    <br><br>
+    What we’re finding
+    Famous speeches tend to have strong engagement scores, especially if they're from the last 100 years. (Older speeches tend to have longer sentences and therefore lower engagement scores.) Check out the patterns of emphasis in <a href="/entries/5cc8ec4479d11f0017b30a51">"I Have a Dream" by Dr. Martin Luther King</a>.
+    <br><br>
+    Religious texts also seem to have strong engagement scores despite the fact that many of them contain long sentences. We believe this has to do with the fact that most older religious texts were written to be read aloud. Check out the patterns of emphasis in this analysis of <a href="/entries/5cc8d64a83d10f00177fdd4d">Paul’s Epistle to the Romans</a>.
+    <br><br>
+    Despite being one of the most popular newspapers in the US, the New York Times tends to receive average engagement scores. From what we’ve seen, this tends to be caused by sentences so long they often stand alone as paragraphs. Check out the patterns of emphasis in <a href="/entries/5cc8fd9a71e3003516db60b6">this article about Yeti footprints</a>.
+
+  </div>
+  </body>
+  <% include ../partials/jsLinks.ejs %>
+</html>
