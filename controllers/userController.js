@@ -70,7 +70,62 @@ router.post('/', function(req, res) //POST route to create a new user!!
 						else
 						{
 							console.log("Created a new user");
-							res.send(`Congratulations ${req.body.username}, you have now registered as a user! Be sure to log in now!<br><a href="/auth/login">Go to login page</a>`);
+							
+
+
+
+
+
+							//NOW LOG THIS USER IN!
+							//NOTE: THIS WAS COPIED FROM THE LOGIN POST ROUTE IN authController
+							//IF authController CHANGES, THIS WILL ALSO NEED TO BE CHANGED!!!
+
+							//Change username to lowercase:
+							req.body.username = req.body.username.toLowerCase();
+							console.log(`POST /login: trying to login for ${req.body.username}`);
+							//Find the user and take note of the password hash:
+							User.findOne({username: req.body.username}, function(err, foundUser)
+							{
+								if (err) //If there was an error of some sort
+								{
+									console.log(err);
+									res.send("There was an error while logging in. Send this to the website developers: " + err);
+								}
+								else if (!foundUser) //User does not exist!
+								{
+									req.session.loginAttempt = false;
+									res.redirect('/auth/login')
+								}
+								else //User DOES exist. Try the password now!!
+								{
+									//Compare password hash to entered password using bcrypt:
+									console.log(`Comparing bcrypt password hash.....`);
+									if (bcrypt.compareSync(req.body.password, foundUser.password))
+									{
+										//Passwords MATCH!
+										req.session.username = req.body.username;
+										req.session.logged = true;
+										req.session.usertype = foundUser.usertype;
+										console.log(`${req.body.username} login attempt: passwords match`);
+										req.session.messages.userwelcome = `Welcome, ${req.session.username}!`;
+										req.session.curuserid = foundUser._id;
+										res.redirect('/home');
+										req.session.loginAttempt = true;
+									}
+									else
+									{
+										//Passwords do NOT MATCH!
+										req.session.loginAttempt = false;
+										res.redirect('/auth/login')
+									}
+								}
+							});
+
+							//DONE LOGGING IN!
+
+
+
+							//res.send(`Congratulations ${req.body.username}, you have now registered as a user! Be sure to log in now!<br><a href="/auth/login">Go to login page</a>`);
 						}
 					});
 				}

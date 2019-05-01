@@ -56,8 +56,8 @@ function stringSanitizer(str)
 			case '~': //These will be for removing a single problematic character
 			case '#':
 			case '@':
-			case '$':
-			case '%':
+			//case '$':
+			//case '%':
 			case '^':
 			case '_':
 			case '+':
