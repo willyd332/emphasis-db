@@ -17,17 +17,17 @@
 
 		<form action="/entries" method="post">
 			Author:<br/>
-			<input class="entryInput" type="text" name="author"><br/><br/>
+			<input class="entryInput" type="text" name="author" required><br/><br/>
 			Title:<br/>
-			<input class="entryInput" type="text" name="title"><br/><br/>
+			<input class="entryInput" type="text" name="title" required><br/><br/>
 			Link:<br/>
 			<input class="entryInput" type="text" name="link"><br><br>
 			<!--String-->
 			 					<textarea class="entryInput" rows=25 cols=100 name="string">Put your text here!</textarea><br><br>
 			Publication Year:<br/>
-			<input class="entryInput" type="number" name="publicationYear"><br><br/>
+			<input class="entryInput" type="number" name="publicationYear" required><br><br/>
 			Content Type:
-			<br><select type="text" name="contentType">
+			<br><select type="text" name="contentType" required>
 						<option value="news">News</option>
 						<option value="opinion">Opinion</option>
 						<option value="fiction">Fiction</option>
@@ -40,7 +40,7 @@
 						<option value="other">Other</option>
 					</select><br/><br/>
 			Publisher:<br/>
-			<input  class="entryInput" type="text" name="publisher"><br/>
+			<input  class="entryInput" type="text" name="publisher" required><br/>
 
 			<button type="submit">Submit Entry</button>
 		</form>
