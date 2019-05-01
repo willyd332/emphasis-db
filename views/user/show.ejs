@@ -21,8 +21,18 @@
 			Display name: <%=user.displayname%><br>
 			User type: <%=user.usertype%><br>
 		</p>
+		<br><br><br><br><br><br>
+		<h3>All Your Entries</h4>
+			<% if (entries[0].title){ %>
+		<ul>
+			<% for (let i = 0; i < entries.length; i++){ %>
+				<a href="entries/<%=entries[i]._id%>"><li><h4><%=entries[i].title%></h4></li></a>
+			<% } %>
+		</ul>
+		<%} else {%>
+			<a href="/entries/new">Create A New Entry</a>
+			<% } %>
 
-		<a href="/">Back to home</a>
 	</div>
 
 	<% include ../partials/jsLinks.ejs %>

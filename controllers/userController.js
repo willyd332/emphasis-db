@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 const User = require('../models/userSchema');
+const Entry = require('../models/entrySchema');
 
 router.get('/', function(req, res)
 {
@@ -70,7 +71,7 @@ router.post('/', function(req, res) //POST route to create a new user!!
 						else
 						{
 							console.log("Created a new user");
-							
+
 
 
 
@@ -147,8 +148,16 @@ router.get('/:id', function(req, res)
 		if (err) {console.log(err);}
 		else
 		{
-			console.log(`GET /users/${req.params.id}`);
-			res.render('user/show.ejs', {user: foundUser})
+			Entry.find({userId: foundUser._id}, (err,foundEntries)=>{
+				if (err) {
+						console.log(err);
+				} else {
+				res.render('user/show.ejs', {
+					user: foundUser,
+					entries: foundEntries
+					})
+				}
+			})
 		}
 	});
 });
