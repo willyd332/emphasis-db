@@ -146,17 +146,105 @@ async function getNewsApi ()
 
 
 
-
-
-
-
-
-
-router.get('/newsapi', function(req, res)
+router.get('/', function(req, res)
 {
-	//console.log('GET bot/newsapi');
-	//res.send(getNewsApi());
-	res.send("This is temporarily disabled");
+	if (!req.session.logged || req.session.usertype !== 'admin')
+	{
+		//Permission denied!!!
+		res.send(`You do not have the authority to do this!!<br><a href="/">Back to home</a>`)
+	}
+	else
+	{	
+		User.find({usertype: 'bot'}, function(err, foundUsers)
+		{
+			if (err) {console.log(err);}
+			else
+			{
+				console.log("GET /bot");
+				//NOTE: The bot index is the same in principle as the user index; except
+				//we're sending it only the bots instead of all the users
+				
+				//Construct an array of bot statuses:
+				let botstatus = [];
+				for (let i = 0; i < foundUsers.length; i++)
+				{
+					switch (foundUsers[i].username)
+					{
+						case 'bot-newsapi':
+							if (jobNewsApi.running)
+							{
+								botstatus[i] = "Active";
+							}
+							else
+							{
+								botstatus[i] = "Inactive";
+							}
+							break;
+						default:
+							botstatus[i] = "Not Associated";
+					}
+				}
+				res.render('bots/index.ejs', {users: foundUsers, botstatus: botstatus});
+			}
+		});
+	}
+});
+
+
+
+
+
+router.get('/bot-newsapi', function(req, res)
+{
+
+	if (!req.session.logged || req.session.usertype !== 'admin')
+	{
+		//Permission denied!!!
+		res.send(`You do not have the authority to do this!!<br><a href="/">Back to home</a>`)
+	}
+	else
+	{
+		console.log('GET bot/bot-newsapi');
+		res.send("Success");
+	}
+});
+
+
+router.get('/bot-newsapi/start', function(req, res)
+{
+
+	if (!req.session.logged || req.session.usertype !== 'admin')
+	{
+		//Permission denied!!!
+		res.send(`You do not have the authority to do this!!<br><a href="/">Back to home</a>`)
+	}
+	else
+	{
+		console.log('GET bot/bot-newsapi/start');
+		jobNewsApi.start();
+		//console.log(jobNewsApi);
+		//console.log(jobNewsApiStatus);
+		res.send("Success");
+	}
+});
+
+
+router.get('/bot-newsapi/stop', function(req, res)
+{
+
+	if (!req.session.logged || req.session.usertype !== 'admin')
+	{
+		//Permission denied!!!
+		res.send(`You do not have the authority to do this!!<br><a href="/">Back to home</a>`)
+	}
+	else
+	{
+		console.log('GET bot/bot-newsapi/stop');
+		jobNewsApi.stop();
+		//console.log(jobNewsApi);
+		//console.log(jobNewsApiStatus);
+		res.send("Success");
+	}
 });
 
 
@@ -169,11 +257,12 @@ router.get('/newsapi', function(req, res)
 
 
 
-
-const job = new CronJob('* * */1 * * *', function() {
+//NewsAPI bot runs every 15 minutes
+const jobNewsApi = new CronJob('* */15 * * * *', function() {
   console.log("CRON: getNewsApi");
   getNewsApi();
 }, null, true, 'America/Denver');
+//jobNewsApi.start();
 
 
 
