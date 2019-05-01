@@ -17,7 +17,7 @@
   <div class="col-md-2 pull-left" id="filterBox">
   <form action="/entries" method="get">
 
-    <div class="filterOption">
+    <div class="filterOption topFilter">
       <h4>Content Type</h4>
       <select name="contentType">
         <option value="<%=content%>"><%=content%></option>
@@ -66,7 +66,7 @@
     </select>
     </div>
 
-    <div class="filterOption">
+    <div class="filterOption bottomFilter">
       <button type="submit">Filter Entries</button>
     </div>
   </form>
@@ -135,7 +135,7 @@
 
   </div>
   <div class="col-md-10 entryTitle">
-    <h1>EMPHASIS DB DATABASE</h1>
+    <h1 class="titleDB">EMPHASIS DB DATABASE</h1>
   </div>
 </div>
 <br><br><br><br>
@@ -144,9 +144,10 @@
   <%  if (comparing) {      %>
   <h2>Here are entries with color percentages similar to the one you are comparing with, sorted according to how similar they are!</h2>
   <%  }                     %>
-  
+
   <% if (totalEnt.length > 0){%>
-      <% for (let i = 0; i < entries.length; i++) {%>
+      <% for (let i = 0; i < entries.length; i++) { %>
+        <% if (entries[i].text[0]){ %>
         <div class="col-md-5 entry">
         <a href="/entries/<%=entries[i]._id%>" class="entryLink">
         <div class="col-md-12">
@@ -159,12 +160,17 @@
             <div class="entryInfo"><%=entries[i].engagementScore%> Engagement</div>
             </div>
             <p class="col-md-12 entryPDisplay">
-              <%=entries[i].text[0].text%>
+                <%=entries[i].text[0].text%>
             </p>
         </div>
         </a>
       </div>
-      <%}%>
+      <% } else if (session.usertype === "admin"){%>
+        <form action="/entries/<%=entries[i]._id%>/delete" method="get">
+          <button type="submit" >REMOVE CORRUPT ENTRY</button>
+        </form>
+      <% } %>
+      <% } %>
       <%} else {%>
         <div class="col-md-10 entry">
         <div class="col-md-12">
