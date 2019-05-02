@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(session(
 {
 	//TODO: what should this secret string be?
-	secret: "avmjlajurialajfrlirjalifjsadligjliajalerjalkejfidsjvlzkcxjvlaisjdifjsaf",
+	secret: Process.env.sessionSecret,
 	resave: false, //only save if there has been a change
 	saveUninitialized: false, //only save if we have mutated the session - this is what should be done for logins
 	logged: false,
