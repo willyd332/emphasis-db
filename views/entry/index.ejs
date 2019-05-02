@@ -10,7 +10,7 @@
     <% include ../partials/navbar.ejs %>
 
 
-	<br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
 <div class="container-fluid">
 
 <div class="row">
@@ -18,8 +18,8 @@
   <form action="/entries" method="get">
 
     <div class="filterOption topFilter">
-      <h4>Content Type</h4>
-      <select name="contentType">
+      <h4 class="filterTitle">Content Type</h4>
+      <select name="contentType" class="filterInput">
         <option value="<%=content%>"><%=content%></option>
         <option value="news">News</option>
         <option value="opinion">Opinion</option>
@@ -36,20 +36,23 @@
     </div>
 
     <div class="filterOption">
-    <h4>Publisher</h4>
-    <input type="text" name="publisher" value="<%=publisher%>">
-    <h4>Publication Year</h4>
-    <input type="number" name="publicationYear" value="<%=pbYear%>">
+    <h4 class="filterTitle">Publisher</h4>
+    <input class="filterInput" type="text" name="publisher" value="<%=publisher%>">
     </div>
 
     <div class="filterOption">
-    <h4>Author Name</h4>
-    <input type="text" name="authorName" value="<%=author%>">
+    <h4 class="filterTitle">Publication Year</h4>
+    <input class="filterInput" type="number" name="publicationYear" value="<%=pbYear%>">
     </div>
 
     <div class="filterOption">
-    <h4>Engagement Score</h4>
-    <select name="engagementScore" value="<%=engagement%>">
+    <h4 class="filterTitle">Author Name</h4>
+    <input class="filterInput" type="text" name="authorName" value="<%=author%>">
+    </div>
+
+    <div class="filterOption">
+    <h4 class="filterTitle">Engagement Score</h4>
+    <select class="filterInput" name="engagementScore" value="<%=engagement%>">
       <%let engagTen = (parseInt(engagement) + 10) %>
       <option value="<%=engagement%>"><%=engagement%></option>
       <option value="ALL">ALL</option>
@@ -65,9 +68,9 @@
       <option value="90">90-100</option>
     </select>
     </div>
-
+    <br>
     <div class="filterOption bottomFilter">
-      <button type="submit">Filter Entries</button>
+      <button class="filterButton" type="submit">Filter Entries</button>
     </div>
   </form>
 </div>
@@ -135,7 +138,7 @@
 
   </div>
   <div class="col-md-10 entryTitle">
-    <h1 class="titleDB">EMPHASIS DB DATABASE</h1>
+    <h1 class="titleDB"><span class="navDBL">EMPHASIS D</span><span class="navDBR">B DATABASE</span></h1>
   </div>
 </div>
 <br><br><br><br>
@@ -193,13 +196,20 @@
       <input style="display:none" name="publisher" value="<%=publisher%>">
         <% let base = pageNum - 2;%>
         <% let top = pageNum + 5;%>
-        <% if (top > (totalEnt.length/16)){top = (totalEnt.length/16)} %>
+        <% if (top > (Math.ceil(totalEnt.length/16))){top = (Math.ceil(totalEnt.length/16))} %>
         <% if (base <= 0){base = 1} %>
         <% if (pageNum > 5){%>
-        <button type="submit" name="number" value="<%=1%>">1...</button>
+        <button type="submit" name="number" class="pageBtn" value="<%=1%>">1...</button>
         <% } %>
-        <% for (let i = base; i < top; i++){ %>
-          <button type="submit" name="number" value="<%=i%>"><%=i%></button>
+        <% for (let i = base; i <= top; i++){ %>
+          <% if (i == pageNum){%>
+          <button type="submit" style="border: 3px groove #CCFFE1" name="number" class="pageBtn" value="<%=i%>"><%=i%></button>
+            <% } else { %>
+          <button type="submit" name="number" class="pageBtn" value="<%=i%>"><%=i%></button>
+          <% } %>
+        <% } %>
+        <% if (Math.ceil(totalEnt.length/16)-5 > pageNum){%>
+        <button type="submit" name="number" class="pageBtn" value="<%=Math.ceil(totalEnt.length/16)%>">...<%=Math.ceil(totalEnt.length/16)%></button>
         <% } %>
 
     </form>
