@@ -7,45 +7,18 @@
 <body>
 
 	<% include ../partials/navbar.ejs %>
-
 	<br><br><br>
-	<div class="infoDisplay jumbotron">
-	<div class="container col-sm-11">
-
-			<div class="col-sm-3">
-				<a href="/home/about/emphasis"><button class="btn generalButton">
-							<h5 class="generalButton">What Is Emphasis DB?</h5>
-					</button></a>
-			</div>
-
-			<div class="col-sm-3">
-				<a href="/home/about/neuroscience"><button class="btn generalButton">
-							<h5 class="generalButton">Explore Neuroscience</h5>
-						</button></a>
-			</div>
-
-			<div class="col-sm-3">
-				<a href="/home/about/theory"><button class="btn generalButton">
-							<h5 class="generalButton">Explore Language Theory</h5>
-						</button>
-						</a>
-			</div>
-
-			<div class="col-sm-3">
-					<a href="/home/about/implement"><button class="btn generalButton">
-							<h5 class="generalButton">Implementing Emphasis DB?</h5>
-						</button></a>
-			</div>
-	</div>
-	</div>
+	<br><br><br>
 	<div class="container">
 		<div class="jumbotron">
 			<%	if (session.usertype == 'bot') {	%>
 				<h4><font color=red><i>WARNING: You are logged in to a BOT ACCOUNT. Don't make any manual entries here unless you know what you are doing!</i></font></h4>
 			<%	}									%>
 			<%	if (session.logged) {								%>
-					<h2 class="welcome">Welcome to Emphasis-DB, <%=session.username%></h2>
-					<img style="width:200px;height:200:px;border-radius:15px" src="/images/DBLogo.png">
+					<h1 style="text-align:center"><span class="navDBL">Empha</span><span class="navDBR">sis DB</span></h1>
+					<br><br>
+					<h2 class="welcome">Welcome, <%=session.username%></h2>
+
 			<%	}									%>
 			<%	if (session.usertype === 'admin') {		%>
 					<hr>
@@ -55,8 +28,41 @@
 					<a href="/users/new">Create a new user</a><br>
 					<a href="/bot">Bot Index</a><br>
 			<%	}										%>
-				<br><br>
+			<br><br>
+				<div class="row col-md-12">
+						<div class="col-md-3">
+							<a href="/home/about/emphasis"><button class="btn generalButton">
+										<h5 class="generalButton">What Is Emphasis DB?</h5>
+								</button></a>
+						</div>
+
+						<div class="col-md-3">
+							<a href="/home/about/neuroscience"><button class="btn generalButton">
+										<h5 class="generalButton">Neuroscience</h5>
+									</button></a>
+						</div>
+
+						<div class="col-md-3">
+							<a href="/home/about/theory"><button class="btn generalButton">
+										<h5 class="generalButton">Language Theory</h5>
+									</button>
+									</a>
+						</div>
+
+						<div class="col-md-3">
+								<a href="/home/about/implement"><button class="btn generalButton">
+										<h5 class="generalButton">Implementation</h5>
+									</button></a>
+						</div>
 				</div>
+				<br><br><br><br><br>
+				<div style="text-align:center" class="row">
+					<a href="/entries"><button style="display:inline-block" type="button" class="mainEntButt navDBL" name="button">All Entries</button></a>
+					<a href="/entries/new"><button style="display:inline-block" type="button" class="mainEntButt navDBR" name="button">New Entry</button></a>
+				</div>
+				<br>
+				</div>
+
 </div>
 
 			<% include ../partials/jsLinks.ejs %>
