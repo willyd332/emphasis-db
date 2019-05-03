@@ -3,6 +3,7 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
+require('dotenv').config()
 
 
 const app = express();
