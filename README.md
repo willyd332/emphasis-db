@@ -1,6 +1,35 @@
-#README: EMPHASIS DATABASE MVP
+# EMPHASIS DB
+## LINK TO PROJECT: http://emphasisdb.herokuapp.com/
 
-Emphasis AI builds solutions that improve human understanding. Our first product is a text editor that helps writers capture their readers' imaginations. It does this using a simple, four-color highlighting system. Based on ten years of research in the field of semiotics, our patent-pending systems are aligned with the latest neuroscience.
+### Description of Emphasis DB
+
+Emphasis DB is the online face of Emphasis AI. 
+
+Emphasis AI is a model of natrual language based on ten years of research in the field of semiotics, and grid cell neuroscience. It is designed to help writers capture their readers' attention by classifying sentences, words, and paragraphs to assign them an engagement score.
+
+Emphasis DB is a full stack application I developed with a team of three. Our goal was to allow a wide range of users to access Emphasis AI, record their entries, and gather scientific data for future research into natrual language processing.
+It is a full CRUD application that allows users to input large amounts of text, essays, aritcles, etc... and run them through the Emphasis AI. These entries are analyzed and stored in a MongoDB database. 
+
+Users are able to view their analyzed entries to gain insights. The data is visualized using a five color system. More information is available on EmphasisDB --- http://emphasisdb.herokuapp.com/.
+
+My Contributions:
+- Data visualization system
+- Inputed text parsing (to make it readable for Emphasis AI)
+- Compiling the data received
+- Developed the Engagement Score Algorithm (based on data)
+- The majority of the front end styling (CSS + Bootstap)
+- Other...
+
+
+
+
+
+
+
+
+
+
+#### Deliverables
 
 The Emphasis Database is a CRUD application that allows examples of emphasis to be archived. Users will be able to upload text from the web. The text will be of five content types: news articles, blog posts, marketing copy, technical documentation, and educational material. When creating an entry, users will select a content type from a drop-down menu. Then they will enter the title of the text, the author's name, and a link to the text.
 
@@ -77,26 +106,3 @@ Refine the look of the website in CSS (All)
  9. When the user creates a new entry, they will have the option to make it public or private. Private entries will be viewable only by the user. Public entries will be viewable by every user.
  10. If the user decides to go to their account, they will be sent to a user show page. The show page will have all of their user data, as well as a list of their entries.
 
-#DIVISION OF LABOR:
-
-   Main things that must be made:
-
-   1. Translating the returned Analysis into usable Data. (We will make the functions in separate JS files) (Will)
-
-   2. Translating the inputed string into the Array 0f 2000 characters each. (We will make the functions seperate JS files) (Will)
-
-   3. Creating the pages and routes for each wireframe and creating the basic server page (Collin)
-      1. This includes setting up the server
-      2. Creating the Views
-      3. Creating the DB
-      4. Creating the Models
-      5. Creating the (basic navigation at first) controllers
-      6. Creating the login/register functions (encrypting passwords, etc…)
-
-   4. Figuring out and making the actual API call (John)
-
-   5. The statistics function that translates the color percentages into the actual engagement score (based on the optimal 33%:33%:33% ratio. (Bonus)
-
-   7. Somebody should write an About This app page that describes what it's doing and what it might be used for. (John)
-
-   8. Refine the look of the website in CSS (All)
