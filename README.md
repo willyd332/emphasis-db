@@ -1,4 +1,7 @@
 # EMPHASIS DB
+
+******THIS CODE BASE DOES NOT REPRESENT THE MOST RECENT VERSION -- IT WAS FORKED IN APRIL
+
 ## LINK TO PROJECT: http://emphasisdb.herokuapp.com/
 
 ### Description of Emphasis DB
